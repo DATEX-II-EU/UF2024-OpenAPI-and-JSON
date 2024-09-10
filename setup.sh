@@ -11,6 +11,7 @@ sudo chmod +x /usr/local/bin/openapi-generator-cli.jar || { echo 'chmod failed';
 echo 'Updating .bashrc'
 # Use a here document to append the alias to .bashrc
 cat << 'EOF' >> ~/.bashrc
+
 # Alias for OpenAPI Generator CLI
 alias openapi-generator="java -jar /usr/local/bin/openapi-generator-cli.jar"
 EOF
