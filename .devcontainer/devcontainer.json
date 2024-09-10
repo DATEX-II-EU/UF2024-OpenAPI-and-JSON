@@ -1,5 +1,5 @@
 {
-    "name": "Java and .NET 8",
+    "name": "Java, .NET 8, and Python 3",
     "build": {
         "dockerfile": "Dockerfile"
     },
@@ -10,15 +10,15 @@
             "installGradle": "false"
         }
     },
-    "postCreateCommand": "bash setup.sh && sudo /root/.dotnet/dotnet --version",
+    "postCreateCommand": "bash setup.sh && sudo /root/.dotnet/dotnet --version && python3 --version",
     "customizations": {
         "vscode": {
             "extensions": [
                 "vscjava.vscode-java-pack",
-                "ms-dotnettools.csharp"
+                "ms-dotnettools.csharp",
+                "ms-python.python"
             ]
         }
     }
 }
-
 
