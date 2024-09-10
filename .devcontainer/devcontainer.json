@@ -20,12 +20,10 @@
 	// "postCreateCommand": "java -version",
 	 //"postCreateCommand": "sudo apt-get update && sudo apt-get install -y maven wget unzip && sudo wget https://repo1.maven.org/maven2/org/openapitools/openapi-generator-cli/6.0.0/openapi-generator-cli-6.0.0.jar -O /usr/local/bin/openapi-generator-cli.jar && sudo chmod +x /usr/local/bin/openapi-generator-cli.jar && echo 'alias openapi-generator=\"java -jar /usr/local/bin/openapi-generator-cli.jar\"' >> ~/.bashrc && source ~/.bashrc",
 	"postCreateCommand": [
-    "apt-get update",
-    "apt-get install -y maven wget unzip",
-    "wget https://repo1.maven.org/maven2/org/openapitools/openapi-generator-cli/6.0.0/openapi-generator-cli-6.0.0.jar -O /usr/local/bin/openapi-generator-cli.jar",
-    "chmod +x /usr/local/bin/openapi-generator-cli.jar",
+    "sudo wget https://repo1.maven.org/maven2/org/openapitools/openapi-generator-cli/6.0.0/openapi-generator-cli-6.0.0.jar -O /usr/local/bin/openapi-generator-cli.jar",
+    "sudo chmod +x /usr/local/bin/openapi-generator-cli.jar",
     "echo 'alias openapi-generator=\"java -jar /usr/local/bin/openapi-generator-cli.jar\"' >> ~/.bashrc",
-    "echo 'alias openapi-generator=\"java -jar /usr/local/bin/openapi-generator-cli.jar\"' >> ~/.bashrc && alias openapi-generator=\"java -jar /usr/local/bin/openapi-generator-cli.jar\""
+    "alias openapi-generator=\"java -jar /usr/local/bin/openapi-generator-cli.jar\""
 	],
 
 	
