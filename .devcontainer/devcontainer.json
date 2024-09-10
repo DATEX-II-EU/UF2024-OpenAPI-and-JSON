@@ -10,7 +10,7 @@
             "installGradle": "false"
         }
     },
-    "postCreateCommand": "bash setup.sh && dotnet --version",
+    "postCreateCommand": "bash setup.sh && /root/.dotnet/dotnet --version",
     "customizations": {
         "vscode": {
             "extensions": [
@@ -20,3 +20,4 @@
         }
     }
 }
+
