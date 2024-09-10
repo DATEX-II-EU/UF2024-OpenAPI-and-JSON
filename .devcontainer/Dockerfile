@@ -8,4 +8,4 @@ RUN wget https://dot.net/v1/dotnet-install.sh -O dotnet-install.sh \
     && rm dotnet-install.sh
 
 # Add .NET to PATH
-ENV PATH="/root/.dotnet:${PATH}"
+ENV PATH="/root/.dotnet:/root/.dotnet/tools:${PATH}"
