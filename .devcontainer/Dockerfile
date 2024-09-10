@@ -7,8 +7,9 @@ RUN wget https://dot.net/v1/dotnet-install.sh -O dotnet-install.sh \
     && ./dotnet-install.sh --channel 8.0 \
     && rm dotnet-install.sh
 
-# Add .NET to PATH
-ENV PATH="/root/.dotnet:/root/.dotnet/tools:${PATH}"
+# Add .NET to PATH for all users
+ENV DOTNET_ROOT="/root/.dotnet"
+ENV PATH="$DOTNET_ROOT:$PATH"
 
 # Ensure .NET binaries are executable and accessible
 RUN chmod -R a+rx /root/.dotnet
