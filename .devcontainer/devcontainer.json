@@ -10,8 +10,7 @@
 			"version": "none",
 			"installMaven": "true",
 			"installGradle": "false"
-		},
-		"docker-in-docker": "latest"
+		}
 	},
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
@@ -19,7 +18,7 @@
 
 	// Use 'postCreateCommand' to run commands after the container is created.
 	// "postCreateCommand": "java -version",
- 	"postCreateCommand": "wget unzip && wget https://repo1.maven.org/maven2/org/openapitools/openapi-generator-cli/6.0.0/openapi-generator-cli-6.0.0.jar -O /usr/local/bin/openapi-generator-cli.jar && chmod +x /usr/local/bin/openapi-generator-cli.jar && echo 'alias openapi-generator=\"java -jar /usr/local/bin/openapi-generator-cli.jar\"' >> ~/.bashrc && source ~/.bashrc",
+	 "postCreateCommand": "apt-get update && apt-get install -y maven wget unzip && wget https://repo1.maven.org/maven2/org/openapitools/openapi-generator-cli/6.0.0/openapi-generator-cli-6.0.0.jar -O /usr/local/bin/openapi-generator-cli.jar && chmod +x /usr/local/bin/openapi-generator-cli.jar && echo 'alias openapi-generator=\"java -jar /usr/local/bin/openapi-generator-cli.jar\"' >> ~/.bashrc && source ~/.bashrc",
 	// Configure tool-specific properties.
 	// "customizations": {},
 
