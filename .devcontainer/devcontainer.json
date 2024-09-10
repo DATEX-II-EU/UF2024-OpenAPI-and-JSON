@@ -1,40 +1,23 @@
-// For format details, see https://aka.ms/devcontainer.json. For config options, see the
-// README at: https://github.com/devcontainers/templates/tree/main/src/java
+// devcontainer.json
 {
-	"name": "Java",
-	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-	"image": "mcr.microsoft.com/devcontainers/java:1-21-bullseye",
-
-	"features": {
-		"ghcr.io/devcontainers/features/java:1": {
-			"version": "none",
-			"installMaven": "true",
-			"installGradle": "false"
-		}
-	},
-
-	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	// "forwardPorts": [],
-
-	// Use 'postCreateCommand' to run commands after the container is created.
-	// "postCreateCommand": "java -version",
-	 //"postCreateCommand": "sudo apt-get update && sudo apt-get install -y maven wget unzip && sudo wget https://repo1.maven.org/maven2/org/openapitools/openapi-generator-cli/6.0.0/openapi-generator-cli-6.0.0.jar -O /usr/local/bin/openapi-generator-cli.jar && sudo chmod +x /usr/local/bin/openapi-generator-cli.jar && echo 'alias openapi-generator=\"java -jar /usr/local/bin/openapi-generator-cli.jar\"' >> ~/.bashrc && source ~/.bashrc",
-	"postCreateCommand": "bash setup.sh",
-
-	
-	 // Configure tool-specific properties.
-	// "customizations": {},
-
-	"customizations": {
-    // Configure properties specific to VS Code.
-    "vscode": {
-      // Add the IDs of extensions you want installed when the container is created.
-      "extensions": [
-        "vscjava.vscode-java-pack"
-      ]
+    "name": "Java and .NET 8",
+    "build": {
+        "dockerfile": "Dockerfile"
+    },
+    "features": {
+        "ghcr.io/devcontainers/features/java:1": {
+            "version": "none",
+            "installMaven": "true",
+            "installGradle": "false"
+        }
+    },
+    "postCreateCommand": "bash setup.sh",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "vscjava.vscode-java-pack",
+                "ms-dotnettools.csharp"
+            ]
+        }
     }
-  }
-
-	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
-	// "remoteUser": "root"
 }
