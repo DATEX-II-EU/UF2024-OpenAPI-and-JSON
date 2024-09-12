@@ -1,0 +1,3226 @@
+openapi: 3.0.0
+info:
+  contact:
+    email: you@your-company.com
+  description: This is DATEX II Snapshot PULL API returning PayloadPublication.
+  title: DATEX II Snapshot Pull API
+  version: 1.0.2
+servers:
+- description: SwaggerHub API Auto Mocking
+  url: https://localhost:44301/datexpull/1.0.2
+tags:
+- description: Operations available to regular developers
+  name: developers
+paths:
+  /keepalive:
+    get:
+      description: 'Keepalive '
+      operationId: keep_alive
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExchangheInformation'
+          description: Result from keepalive
+      summary: DATEX II snapshot pull
+      tags:
+      - developers
+      x-openapi-router-controller: openapi_server.controllers.developers_controller
+  /pull:
+    get:
+      description: Snapshot pull DATEX II API
+      operationId: snapshot_pull
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageContainer'
+          description: Result from snapshot pull
+      summary: DATEX II snapshot pull
+      tags:
+      - developers
+      x-openapi-router-controller: openapi_server.controllers.developers_controller
+  /pullsituation:
+    get:
+      description: Snapshot pull situation DATEX II API
+      operationId: snapshot_pull_situation
+      parameters:
+      - description: Id of Situation
+        explode: true
+        in: query
+        name: id
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Situation'
+          description: Result from snapshot pull
+      summary: DATEX II snapshot pull situation
+      tags:
+      - developers
+      x-openapi-router-controller: openapi_server.controllers.developers_controller
+components:
+  schemas:
+    MessageContainer:
+      additionalProperties: false
+      properties:
+        payload:
+          items:
+            $ref: '#/components/schemas/PayloadPublicationG'
+          minItems: 0
+          title: payload
+          type: array
+        cisInformation:
+          $ref: '#/components/schemas/CISInformation'
+        exchangeInformation:
+          $ref: '#/components/schemas/ExchangeInformation'
+        informationManagement:
+          $ref: '#/components/schemas/InformationManagement'
+        messageContainerExtensionG:
+          additionalProperties: true
+          title: ExtensionTypeG
+          type: object
+      required:
+      - exchangeInformation
+      title: MessageContainer
+      type: object
+    ExchangheInformation:
+      additionalProperties: false
+      properties:
+        messageType:
+          $ref: '#/components/schemas/MessageTypeEnumG'
+        exchangeContext:
+          $ref: '#/components/schemas/ExchangeContext'
+        dynamicInformation:
+          $ref: '#/components/schemas/DynamicInformation'
+        exchangeInformationExtensionG:
+          additionalProperties: true
+          title: ExtensionTypeG
+          type: object
+      required:
+      - dynamicInformation
+      - exchangeContext
+      title: ExchangeInformation
+      type: object
+    Situation:
+      additionalProperties: false
+      properties:
+        idG:
+          title: idG
+          type: string
+        headerInformation:
+          $ref: '#/components/schemas/HeaderInformation'
+        situationRecord:
+          items:
+            $ref: '#/components/schemas/SituationRecordG'
+          minItems: 1
+          title: situationRecord
+          type: array
+        situationExtensionG:
+          additionalProperties: true
+          title: ExtensionTypeG
+          type: object
+      required:
+      - headerInformation
+      - idG
+      - situationRecord
+      title: Situation
+      type: object
+    ExchangeInformation:
+      additionalProperties: false
+      properties:
+        messageType:
+          $ref: '#/components/schemas/MessageTypeEnumG'
+        exchangeContext:
+          $ref: '#/components/schemas/ExchangeContext'
+        dynamicInformation:
+          $ref: '#/components/schemas/DynamicInformation'
+        exchangeInformationExtensionG:
+          additionalProperties: true
+          title: ExtensionTypeG
+          type: object
+      required:
+      - dynamicInformation
+      - exchangeContext
+      title: ExchangeInformation
+      type: object
+    MessageTypeEnumG:
+      additionalProperties: false
+      properties:
+        value:
+          $ref: '#/components/schemas/MessageTypeEnum'
+        extendedValueG:
+          title: extendedValueG
+          type: string
+      required:
+      - value
+      title: MessageTypeEnumG
+      type: object
+    MessageTypeEnum:
+      enum:
+      - CISFeedback
+      - CISServiceRequest
+      - closeSession
+      - keepAlive
+      - openSession
+      - payloadDelivery
+      - return
+      - extendedG
+      title: MessageTypeEnum
+      type: string
+    ExchangeContext:
+      additionalProperties: false
+      properties:
+        codedExchangeProtocol:
+          $ref: '#/components/schemas/ProtocolTypeEnumG'
+        exchangeSpecificationVersion:
+          maxLength: 1024
+          title: String
+          type: string
+        operatingMode:
+          $ref: '#/components/schemas/OperatingModeEnumG'
+        updateMethod:
+          $ref: '#/components/schemas/UpdateMethodEnumG'
+        nonCodedExchangeProtocol:
+          maxLength: 1024
+          title: String
+          type: string
+        supplierOrCisRequester:
+          $ref: '#/components/schemas/Agent'
+        clientOrCisProvider:
+          items:
+            $ref: '#/components/schemas/Agent'
+          minItems: 0
+          title: clientOrCisProvider
+          type: array
+        subscription:
+          $ref: '#/components/schemas/Subscription'
+        exchangeContextExtensionG:
+          additionalProperties: true
+          title: ExtensionTypeG
+          type: object
+      required:
+      - codedExchangeProtocol
+      - exchangeSpecificationVersion
+      - supplierOrCisRequester
+      title: ExchangeContext
+      type: object
+    ProtocolTypeEnumG:
+      additionalProperties: false
+      properties:
+        value:
+          $ref: '#/components/schemas/ProtocolTypeEnum'
+        extendedValueG:
+          title: extendedValueG
+          type: string
+      required:
+      - value
+      title: ProtocolTypeEnumG
+      type: object
+    ProtocolTypeEnum:
+      enum:
+      - deltaPull
+      - deltaPush
+      - other
+      - simpleCIS
+      - simplePush
+      - snapshotPull
+      - snapshotPush
+      - statefulCIS
+      - statefulPush
+      - extendedG
+      title: ProtocolTypeEnum
+      type: string
+    OperatingModeEnumG:
+      additionalProperties: false
+      properties:
+        value:
+          $ref: '#/components/schemas/OperatingModeEnum'
+        extendedValueG:
+          title: extendedValueG
+          type: string
+      required:
+      - value
+      title: OperatingModeEnumG
+      type: object
+    OperatingModeEnum:
+      enum:
+      - conditionTriggered
+      - onOccurrence
+      - other
+      - periodic
+      - extendedG
+      title: OperatingModeEnum
+      type: string
+    UpdateMethodEnumG:
+      additionalProperties: false
+      properties:
+        value:
+          $ref: '#/components/schemas/UpdateMethodEnum'
+        extendedValueG:
+          title: extendedValueG
+          type: string
+      required:
+      - value
+      title: UpdateMethodEnumG
+      type: object
+    UpdateMethodEnum:
+      enum:
+      - allElementUpdate
+      - allInformationUpdate
+      - other
+      - singleElementUpdate
+      - snapshot
+      - extendedG
+      title: UpdateMethodEnum
+      type: string
+    Agent:
+      additionalProperties: false
+      properties:
+        address:
+          maxLength: 1024
+          title: String
+          type: string
+        name:
+          maxLength: 1024
+          title: String
+          type: string
+        referenceID:
+          maxLength: 1024
+          title: String
+          type: string
+        serviceURL:
+          maxLength: 1024
+          title: String
+          type: string
+        internationalIdentifier:
+          $ref: '#/components/schemas/InternationalIdentifier'
+        agentExtensionG:
+          additionalProperties: true
+          title: ExtensionTypeG
+          type: object
+      title: Agent
+      type: object
+    Subscription:
+      additionalProperties: false
+      properties:
+        name:
+          maxLength: 1024
+          title: String
+          type: string
+        referenceID:
+          $ref: '#/components/schemas/Reference'
+        subscriptionStart:
+          format: date-time
+          title: DateTime
+          type: string
+        subscriptionEnd:
+          format: date-time
+          title: DateTime
+          type: string
+        deliveyFrequency:
+          minimum: 0.0
+          title: NonNegativeInteger
+          type: integer
+        validity:
+          $ref: '#/components/schemas/Validity'
+        subscriptionExtensionG:
+          additionalProperties: true
+          title: ExtensionTypeG
+          type: object
+      title: Subscription
+      type: object
+    DynamicInformation:
+      additionalProperties: false
+      properties:
+        exchangeStatus:
+          $ref: '#/components/schemas/ExchangeStatusEnumG'
+        exchangeStatusDescription:
+          $ref: '#/components/schemas/MultilingualString'
+        completedPaylod:
+          title: Boolean
+          type: boolean
+        messageSequencingNumber:
+          minimum: 0.0
+          title: NonNegativeInteger
+          type: integer
+        messageGenerationTimestamp:
+          format: date-time
+          title: DateTime
+          type: string
+        returnInformation:
+          $ref: '#/components/schemas/ReturnInformation'
+        sessionInformation:
+          $ref: '#/components/schemas/SessionInformation'
+        dynamicInformationExtensionG:
+          additionalProperties: true
+          title: ExtensionTypeG
+          type: object
+      required:
+      - exchangeStatus
+      - messageGenerationTimestamp
+      title: DynamicInformation
+      type: object
+    ExchangeStatusEnumG:
+      additionalProperties: false
+      properties:
+        value:
+          $ref: '#/components/schemas/ExchangeStatusEnum'
+        extendedValueG:
+          title: extendedValueG
+          type: string
+      required:
+      - value
+      title: ExchangeStatusEnumG
+      type: object
+    ExchangeStatusEnum:
+      enum:
+      - closingSession
+      - offline
+      - online
+      - openingSession
+      - resuming
+      - undefined
+      - extendedG
+      title: ExchangeStatusEnum
+      type: string
+    ReturnInformation:
+      additionalProperties: false
+      properties:
+        returnStatus:
+          $ref: '#/components/schemas/ExchangeReturnEnumG'
+        returnStatusReason:
+          $ref: '#/components/schemas/MultilingualString'
+        codedInvalidityReason:
+          items:
+            $ref: '#/components/schemas/InvalidityReasonEnumG'
+          minItems: 0
+          title: codedInvalidityReason
+          type: array
+        returnInformationExtensionG:
+          additionalProperties: true
+          title: ExtensionTypeG
+          type: object
+      required:
+      - returnStatus
+      title: ReturnInformation
+      type: object
+    ExchangeReturnEnumG:
+      additionalProperties: false
+      properties:
+        value:
+          $ref: '#/components/schemas/ExchangeReturnEnum'
+        extendedValueG:
+          title: extendedValueG
+          type: string
+      required:
+      - value
+      title: ExchangeReturnEnumG
+      type: object
+    ExchangeReturnEnum:
+      enum:
+      - ack
+      - closeSessionRequest
+      - fail
+      - snapshotSynchronisationRequest
+      - extendedG
+      title: ExchangeReturnEnum
+      type: string
+    InvalidityReasonEnumG:
+      additionalProperties: false
+      properties:
+        value:
+          $ref: '#/components/schemas/InvalidityReasonEnum'
+        extendedValueG:
+          title: extendedValueG
+          type: string
+      required:
+      - value
+      title: InvalidityReasonEnumG
+      type: object
+    InvalidityReasonEnum:
+      enum:
+      - invalidCISInformation
+      - invalidClient
+      - invalidExchangeContext
+      - invalidInformationManagement
+      - invalidMessage
+      - invalidPayload
+      - invalidSequencingNumber
+      - invalidSession
+      - invalidSupplier
+      - other
+      - extendedG
+      title: InvalidityReasonEnum
+      type: string
+    SessionInformation:
+      additionalProperties: false
+      properties:
+        sessionID:
+          maxLength: 1024
+          title: String
+          type: string
+        startSession:
+          format: date-time
+          title: DateTime
+          type: string
+        sessionInformationExtensionG:
+          additionalProperties: true
+          title: ExtensionTypeG
+          type: object
+      required:
+      - sessionID
+      title: SessionInformation
+      type: object
+    SituationRecordG:
+      additionalProperties: false
+      properties:
+        sitAccident:
+          $ref: '#/components/schemas/Accident'
+      title: SituationRecordG
+      type: object
+    Accident:
+      additionalProperties: false
+      properties:
+        idG:
+          title: idG
+          type: string
+        versionG:
+          title: versionG
+          type: string
+        situationRecordCreationTime:
+          format: date-time
+          title: DateTime
+          type: string
+        situationRecordVersionTime:
+          format: date-time
+          title: DateTime
+          type: string
+        probabilityOfOccurrence:
+          $ref: '#/components/schemas/ProbabilityOfOccurrenceEnumG'
+        accidentCause:
+          $ref: '#/components/schemas/AccidentCauseEnumG'
+        accidentType:
+          items:
+            $ref: '#/components/schemas/AccidentTypeEnumG'
+          minItems: 1
+          title: accidentType
+          type: array
+        collisionType:
+          $ref: '#/components/schemas/CollisionTypeEnumG'
+        totalNumberOfPeopleInvolved:
+          minimum: 0.0
+          title: NonNegativeInteger
+          type: integer
+        totalNumberOfVehiclesInvolved:
+          minimum: 0.0
+          title: NonNegativeInteger
+          type: integer
+        validity:
+          $ref: '#/components/schemas/Validity'
+        locationReference:
+          $ref: '#/components/schemas/LocationReferenceG'
+        vehicleInvolved:
+          items:
+            $ref: '#/components/schemas/Vehicle'
+          minItems: 0
+          title: vehicleInvolved
+          type: array
+        groupOfVehiclesInvolved:
+          items:
+            $ref: '#/components/schemas/GroupOfVehiclesInvolved'
+          minItems: 0
+          title: groupOfVehiclesInvolved
+          type: array
+        groupOfPeopleInvolved:
+          items:
+            $ref: '#/components/schemas/GroupOfPeopleInvolved'
+          minItems: 0
+          title: groupOfPeopleInvolved
+          type: array
+        situationRecordExtensionG:
+          additionalProperties: true
+          title: ExtensionTypeG
+          type: object
+        trafficElementExtensionG:
+          additionalProperties: true
+          title: ExtensionTypeG
+          type: object
+        accidentExtensionG:
+          additionalProperties: true
+          title: ExtensionTypeG
+          type: object
+      required:
+      - accidentType
+      - idG
+      - locationReference
+      - probabilityOfOccurrence
+      - situationRecordCreationTime
+      - situationRecordVersionTime
+      - validity
+      - versionG
+      title: Accident
+      type: object
+    ProbabilityOfOccurrenceEnumG:
+      additionalProperties: false
+      properties:
+        value:
+          $ref: '#/components/schemas/ProbabilityOfOccurrenceEnum'
+        extendedValueG:
+          title: extendedValueG
+          type: string
+      required:
+      - value
+      title: ProbabilityOfOccurrenceEnumG
+      type: object
+    ProbabilityOfOccurrenceEnum:
+      enum:
+      - certain
+      - probable
+      - riskOf
+      - extendedG
+      title: ProbabilityOfOccurrenceEnum
+      type: string
+    AccidentCauseEnumG:
+      additionalProperties: false
+      properties:
+        value:
+          $ref: '#/components/schemas/AccidentCauseEnum'
+        extendedValueG:
+          title: extendedValueG
+          type: string
+      required:
+      - value
+      title: AccidentCauseEnumG
+      type: object
+    AccidentCauseEnum:
+      enum:
+      - avoidanceOfObstacles
+      - driverDistraction
+      - driverDrugAbuse
+      - driverIllness
+      - exceedingSpeedsLimits
+      - excessAlcohol
+      - excessiveDriverTiredness
+      - impermissibleManoeuvre
+      - limitedVisibility
+      - notKeepingASafeDistance
+      - onTheWrongSideOfTheRoad
+      - pedestrianInRoad
+      - poorLaneAdherence
+      - poorMergeEntryOrExitJudgement
+      - poorRoadSurfaceCondition
+      - poorSurfaceAdherence
+      - undisclosed
+      - unknown
+      - vehicleFailure
+      - other
+      - extendedG
+      title: AccidentCauseEnum
+      type: string
+    AccidentTypeEnumG:
+      additionalProperties: false
+      properties:
+        value:
+          $ref: '#/components/schemas/AccidentTypeEnum'
+        extendedValueG:
+          title: extendedValueG
+          type: string
+      required:
+      - value
+      title: AccidentTypeEnumG
+      type: object
+    AccidentTypeEnum:
+      enum:
+      - accident
+      - accidentInvolvingHazardousMaterials
+      - accidentInvolvingHeavyLorries
+      - accidentInvolvingMassTransitVehicle
+      - accidentInvolvingPublicTransport
+      - accidentInvolvingRadioactiveMaterial
+      - accidentInvolvingTrain
+      - collision
+      - multipleVehicleAccident
+      - secondaryAccident
+      - seriousInjuryOrFatalAccident
+      - vehicleStuckUnderBridge
+      - other
+      - extendedG
+      title: AccidentTypeEnum
+      type: string
+    CollisionTypeEnumG:
+      additionalProperties: false
+      properties:
+        value:
+          $ref: '#/components/schemas/CollisionTypeEnum'
+        extendedValueG:
+          title: extendedValueG
+          type: string
+      required:
+      - value
+      title: CollisionTypeEnumG
+      type: object
+    CollisionTypeEnum:
+      enum:
+      - collisionWithAnimal
+      - collisionWithObstacle
+      - collisionWithPerson
+      - headOnCollision
+      - headOnOrSideCollision
+      - multipleVehicleCollision
+      - rearCollision
+      - sideCollision
+      - extendedG
+      title: CollisionTypeEnum
+      type: string
+    GroupOfPeopleInvolved:
+      additionalProperties: false
+      properties:
+        numberOfPeople:
+          minimum: 0.0
+          title: NonNegativeInteger
+          type: integer
+        injuryStatusType:
+          $ref: '#/components/schemas/InjuryStatusTypeEnumG'
+        involvementRole:
+          $ref: '#/components/schemas/InvolvementRolesEnumG'
+        categoryOfPeopleInvolved:
+          $ref: '#/components/schemas/PersonCategoryEnumG'
+        groupOfPeopleInvolvedExtensionG:
+          additionalProperties: true
+          title: ExtensionTypeG
+          type: object
+      title: GroupOfPeopleInvolved
+      type: object
+    InjuryStatusTypeEnumG:
+      additionalProperties: false
+      properties:
+        value:
+          $ref: '#/components/schemas/InjuryStatusTypeEnum'
+        extendedValueG:
+          title: extendedValueG
+          type: string
+      required:
+      - value
+      title: InjuryStatusTypeEnumG
+      type: object
+    InjuryStatusTypeEnum:
+      enum:
+      - dead
+      - injured
+      - seriouslyInjured
+      - slightlyInjured
+      - uninjured
+      - unknown
+      - extendedG
+      title: InjuryStatusTypeEnum
+      type: string
+    InvolvementRolesEnumG:
+      additionalProperties: false
+      properties:
+        value:
+          $ref: '#/components/schemas/InvolvementRolesEnum'
+        extendedValueG:
+          title: extendedValueG
+          type: string
+      required:
+      - value
+      title: InvolvementRolesEnumG
+      type: object
+    InvolvementRolesEnum:
+      enum:
+      - cyclist
+      - motorcyclist
+      - pedestrian
+      - unknown
+      - vehicleDriver
+      - vehicleOccupant
+      - vehiclePassenger
+      - witness
+      - extendedG
+      title: InvolvementRolesEnum
+      type: string
+    PersonCategoryEnumG:
+      additionalProperties: false
+      properties:
+        value:
+          $ref: '#/components/schemas/PersonCategoryEnum'
+        extendedValueG:
+          title: extendedValueG
+          type: string
+      required:
+      - value
+      title: PersonCategoryEnumG
+      type: object
+    PersonCategoryEnum:
+      enum:
+      - adult
+      - child
+      - emergencyServicesPerson
+      - fireman
+      - infant
+      - medicalStaff
+      - memberOfThePublic
+      - policeman
+      - politician
+      - publicTransportPassenger
+      - sickPerson
+      - trafficOfficer
+      - trafficWarden
+      - veryImportantPerson
+      - extendedG
+      title: PersonCategoryEnum
+      type: string
+    PayloadPublicationG:
+      additionalProperties: false
+      properties:
+        versionG:
+          default: "3.5"
+          title: versionG
+          type: string
+        modelBaseVersionG:
+          default: "3"
+          title: modelBaseVersionG
+          type: string
+        extensionNameG:
+          title: extensionNameG
+          type: string
+        extensionVersionG:
+          title: extensionVersionG
+          type: string
+        profileNameG:
+          title: profileNameG
+          type: string
+        profileVersionG:
+          title: profileVersionG
+          type: string
+        sitSituationPublication:
+          $ref: '#/components/schemas/SituationPublication'
+      required:
+      - modelBaseVersionG
+      title: PayloadPublicationG
+      type: object
+    CISInformation:
+      additionalProperties: false
+      properties:
+        serviceFeedback:
+          items:
+            $ref: '#/components/schemas/ServiceFeedback'
+          minItems: 0
+          title: serviceFeedback
+          type: array
+        serviceRequest:
+          items:
+            $ref: '#/components/schemas/ServiceRequest'
+          minItems: 0
+          title: serviceRequest
+          type: array
+        cisInformationExtensionG:
+          additionalProperties: true
+          title: ExtensionTypeG
+          type: object
+      title: CISInformation
+      type: object
+    ServiceFeedback:
+      additionalProperties: false
+      properties:
+        serviceRequestFeedbackReason:
+          $ref: '#/components/schemas/MultilingualString'
+        serviceRequestStatus:
+          $ref: '#/components/schemas/ServiceActionStatusEnumG'
+        serviceRequestReference:
+          $ref: '#/components/schemas/VersionedReference'
+        serviceProvider:
+          $ref: '#/components/schemas/Agent'
+        serviceFeedbackExtensionG:
+          additionalProperties: true
+          title: ExtensionTypeG
+          type: object
+      required:
+      - serviceProvider
+      - serviceRequestReference
+      - serviceRequestStatus
+      title: ServiceFeedback
+      type: object
+    ServiceActionStatusEnumG:
+      additionalProperties: false
+      properties:
+        value:
+          $ref: '#/components/schemas/ServiceActionStatusEnum'
+        extendedValueG:
+          title: extendedValueG
+          type: string
+      required:
+      - value
+      title: ServiceActionStatusEnumG
+      type: object
+    ServiceActionStatusEnum:
+      enum:
+      - compliant
+      - failed
+      - notCompliant
+      - processing
+      - rejected
+      - scheduled
+      - success
+      - timedOut
+      - extendedG
+      title: ServiceActionStatusEnum
+      type: string
+    ServiceRequest:
+      additionalProperties: false
+      properties:
+        idG:
+          title: idG
+          type: string
+        versionG:
+          title: versionG
+          type: string
+        elementToProcessReference:
+          $ref: '#/components/schemas/Reference'
+        elementToProcessVersionedReference:
+          $ref: '#/components/schemas/VersionedReference'
+        expiryTime:
+          $ref: '#/components/schemas/VersionedReference'
+        externalReference:
+          maxLength: 1024
+          title: String
+          type: string
+        notPredefinedServiceName:
+          maxLength: 1024
+          title: String
+          type: string
+        predefinedService:
+          $ref: '#/components/schemas/PredefinedServiceEnumG'
+        requestedAction:
+          $ref: '#/components/schemas/ServiceActionEnumG'
+        servicerRequestCreationTime:
+          format: date-time
+          title: DateTime
+          type: string
+        servicerRequestVersionTime:
+          format: date-time
+          title: DateTime
+          type: string
+        customServiceParameter:
+          maxLength: 1024
+          title: String
+          type: string
+        serviceRequester:
+          $ref: '#/components/schemas/Agent'
+        serviceProvider:
+          items:
+            $ref: '#/components/schemas/Agent'
+          minItems: 1
+          title: serviceProvider
+          type: array
+        serviceRequestCondition:
+          $ref: '#/components/schemas/ServiceRequestCondition'
+        serviceRequestExtensionG:
+          additionalProperties: true
+          title: ExtensionTypeG
+          type: object
+      required:
+      - idG
+      - predefinedService
+      - requestedAction
+      - serviceProvider
+      - serviceRequester
+      - servicerRequestCreationTime
+      - servicerRequestVersionTime
+      - versionG
+      title: ServiceRequest
+      type: object
+    PredefinedServiceEnumG:
+      additionalProperties: false
+      properties:
+        value:
+          $ref: '#/components/schemas/PredefinedServiceEnum'
+        extendedValueG:
+          title: extendedValueG
+          type: string
+      required:
+      - value
+      title: PredefinedServiceEnumG
+      type: object
+    PredefinedServiceEnum:
+      enum:
+      - broadcastDelivery
+      - other
+      - tmpActivation
+      - vmsMessageProcessing
+      - extendedG
+      title: PredefinedServiceEnum
+      type: string
+    ServiceActionEnumG:
+      additionalProperties: false
+      properties:
+        value:
+          $ref: '#/components/schemas/ServiceActionEnum'
+        extendedValueG:
+          title: extendedValueG
+          type: string
+      required:
+      - value
+      title: ServiceActionEnumG
+      type: object
+    ServiceActionEnum:
+      enum:
+      - agreement
+      - cancellation
+      - implementation
+      - processing
+      - statusInformation
+      - termination
+      - extendedG
+      title: ServiceActionEnum
+      type: string
+    ServiceRequestCondition:
+      additionalProperties: false
+      properties:
+        conditionDescription:
+          $ref: '#/components/schemas/MultilingualString'
+        externalIdCondition:
+          items:
+            $ref: '#/components/schemas/String'
+          minItems: 0
+          title: externalIdCondition
+          type: array
+        referencedCondition:
+          items:
+            $ref: '#/components/schemas/Reference'
+          minItems: 0
+          title: referencedCondition
+          type: array
+        versionReferencedCondition:
+          items:
+            $ref: '#/components/schemas/VersionedReference'
+          minItems: 0
+          title: versionReferencedCondition
+          type: array
+        serviceRequestConditionExtensionG:
+          additionalProperties: true
+          title: ExtensionTypeG
+          type: object
+      title: ServiceRequestCondition
+      type: object
+    InformationManagement:
+      additionalProperties: false
+      properties:
+        informationManagedResourceList:
+          $ref: '#/components/schemas/InformationManagedResourceList'
+        informationManagementExtensionG:
+          additionalProperties: true
+          title: ExtensionTypeG
+          type: object
+      title: InformationManagement
+      type: object
+    InformationManagedResourceList:
+      additionalProperties: false
+      properties:
+        elementReference:
+          items:
+            $ref: '#/components/schemas/ElementReference'
+          minItems: 1
+          title: elementReference
+          type: array
+        informationManagedResourceListExtensionG:
+          additionalProperties: true
+          title: ExtensionTypeG
+          type: object
+      required:
+      - elementReference
+      title: InformationManagedResourceList
+      type: object
+    ElementReference:
+      additionalProperties: false
+      properties:
+        managementStatus:
+          $ref: '#/components/schemas/ManagementTypeEnumG'
+        reference:
+          $ref: '#/components/schemas/Reference'
+        versionedReference:
+          $ref: '#/components/schemas/VersionedReference'
+        elementReferenceExtensionG:
+          additionalProperties: true
+          title: ExtensionTypeG
+          type: object
+      required:
+      - managementStatus
+      title: ElementReference
+      type: object
+    ManagementTypeEnumG:
+      additionalProperties: false
+      properties:
+        value:
+          $ref: '#/components/schemas/ManagementTypeEnum'
+        extendedValueG:
+          title: extendedValueG
+          type: string
+      required:
+      - value
+      title: ManagementTypeEnumG
+      type: object
+    ManagementTypeEnum:
+      enum:
+      - cancelled
+      - closed
+      - extendedG
+      title: ManagementTypeEnum
+      type: string
+    ExtensionTypeG:
+      additionalProperties: true
+      title: ExtensionTypeG
+      type: object
+    HeaderInformation:
+      additionalProperties: false
+      properties:
+        informationStatus:
+          $ref: '#/components/schemas/InformationStatusEnumG'
+        headerInformationExtensionG:
+          additionalProperties: true
+          title: ExtensionTypeG
+          type: object
+      required:
+      - informationStatus
+      title: HeaderInformation
+      type: object
+    InformationStatusEnumG:
+      additionalProperties: false
+      properties:
+        value:
+          $ref: '#/components/schemas/InformationStatusEnum'
+        extendedValueG:
+          title: extendedValueG
+          type: string
+      required:
+      - value
+      title: InformationStatusEnumG
+      type: object
+    InformationStatusEnum:
+      enum:
+      - real
+      - securityExercise
+      - technicalExercise
+      - test
+      - extendedG
+      title: InformationStatusEnum
+      type: string
+    String:
+      maxLength: 1024
+      title: String
+      type: string
+    InternationalIdentifier:
+      additionalProperties: false
+      properties:
+        country:
+          maxLength: 1024
+          title: String
+          type: string
+        nationalIdentifier:
+          maxLength: 1024
+          title: String
+          type: string
+        internationalIdentifierExtensionG:
+          additionalProperties: true
+          title: ExtensionTypeG
+          type: object
+      required:
+      - country
+      - nationalIdentifier
+      title: InternationalIdentifier
+      type: object
+    CountryCode:
+      $ref: '#/components/schemas/String'
+    Reference:
+      properties:
+        idG:
+          title: idG
+          type: string
+      required:
+      - idG
+      title: Reference
+      type: object
+    DateTime:
+      format: date-time
+      title: DateTime
+      type: string
+    NonNegativeInteger:
+      minimum: 0.0
+      title: NonNegativeInteger
+      type: integer
+    Validity:
+      additionalProperties: false
+      properties:
+        validityStatus:
+          $ref: '#/components/schemas/ValidityStatusEnumG'
+        validityTimeSpecification:
+          $ref: '#/components/schemas/OverallPeriod'
+        validityExtensionG:
+          additionalProperties: true
+          title: ExtensionTypeG
+          type: object
+      required:
+      - validityStatus
+      - validityTimeSpecification
+      title: Validity
+      type: object
+    ValidityStatusEnumG:
+      additionalProperties: false
+      properties:
+        value:
+          $ref: '#/components/schemas/ValidityStatusEnum'
+        extendedValueG:
+          title: extendedValueG
+          type: string
+      required:
+      - value
+      title: ValidityStatusEnumG
+      type: object
+    ValidityStatusEnum:
+      enum:
+      - active
+      - planned
+      - suspended
+      - definedByValidityTimeSpec
+      - extendedG
+      title: ValidityStatusEnum
+      type: string
+    OverallPeriod:
+      additionalProperties: false
+      properties:
+        overallStartTime:
+          format: date-time
+          title: DateTime
+          type: string
+        overallEndTime:
+          format: date-time
+          title: DateTime
+          type: string
+        overallPeriodExtensionG:
+          additionalProperties: true
+          title: ExtensionTypeG
+          type: object
+      required:
+      - overallStartTime
+      title: OverallPeriod
+      type: object
+    MultilingualString:
+      additionalProperties: false
+      properties:
+        values:
+          items:
+            $ref: '#/components/schemas/MultiLingualStringValue'
+          title: values
+          type: array
+      title: MultilingualString
+      type: object
+    MultiLingualStringValue:
+      additionalProperties: false
+      properties:
+        lang:
+          title: lang
+          type: string
+        value:
+          title: value
+          type: string
+      required:
+      - lang
+      - value
+      title: MultiLingualStringValue
+      type: object
+    Boolean:
+      title: Boolean
+      type: boolean
+    LocationReferenceG:
+      additionalProperties: false
+      properties:
+        locLinearLocation:
+          $ref: '#/components/schemas/LinearLocation'
+        locSingleRoadLinearLocation:
+          $ref: '#/components/schemas/SingleRoadLinearLocation'
+        locPointLocation:
+          $ref: '#/components/schemas/PointLocation'
+      title: LocationReferenceG
+      type: object
+    LinearLocation:
+      additionalProperties: false
+      properties:
+        coordinatesForDisplay:
+          $ref: '#/components/schemas/PointCoordinates'
+        supplementaryPositionalDescription:
+          $ref: '#/components/schemas/SupplementaryPositionalDescription'
+        gmlLineString:
+          $ref: '#/components/schemas/GmlLineStringG'
+        locationReferenceExtensionG:
+          additionalProperties: true
+          title: ExtensionTypeG
+          type: object
+        locationExtensionG:
+          additionalProperties: true
+          title: ExtensionTypeG
+          type: object
+        networkLocationExtensionG:
+          additionalProperties: true
+          title: ExtensionTypeG
+          type: object
+        linearLocationExtensionG:
+          additionalProperties: true
+          title: ExtensionTypeG
+          type: object
+      title: LinearLocation
+      type: object
+    PointCoordinates:
+      additionalProperties: false
+      properties:
+        latitude:
+          title: Float
+          type: number
+        longitude:
+          title: Float
+          type: number
+        heightCoordinate:
+          items:
+            $ref: '#/components/schemas/HeightCoordinate'
+          maxItems: 3
+          minItems: 0
+          title: heightCoordinate
+          type: array
+        positionConfidenceEllipse:
+          $ref: '#/components/schemas/PositionConfidenceEllipse'
+        horizontalPositionAccuracy:
+          $ref: '#/components/schemas/PositionAccuracy'
+        pointCoordinatesExtensionG:
+          additionalProperties: true
+          title: ExtensionTypeG
+          type: object
+      required:
+      - latitude
+      - longitude
+      title: PointCoordinates
+      type: object
+    HeightCoordinate:
+      additionalProperties: false
+      properties:
+        heightValue:
+          title: Float
+          type: number
+        heightType:
+          $ref: '#/components/schemas/HeightTypeEnumG'
+        altitudeConfidence:
+          $ref: '#/components/schemas/AltitudeConfidence'
+        verticalPositionAccuracy:
+          $ref: '#/components/schemas/PositionAccuracy'
+        heightCoordinateExtensionG:
+          additionalProperties: true
+          title: ExtensionTypeG
+          type: object
+      required:
+      - heightValue
+      title: HeightCoordinate
+      type: object
+    HeightTypeEnumG:
+      additionalProperties: false
+      properties:
+        value:
+          $ref: '#/components/schemas/HeightTypeEnum'
+        extendedValueG:
+          title: extendedValueG
+          type: string
+      required:
+      - value
+      title: HeightTypeEnumG
+      type: object
+    HeightTypeEnum:
+      enum:
+      - ellipsoidalHeight
+      - gravityRelatedHeight
+      - relativeHeight
+      - extendedG
+      title: HeightTypeEnum
+      type: string
+    AltitudeConfidence:
+      additionalProperties: false
+      properties:
+        altitudeAccuracyCodedValue:
+          $ref: '#/components/schemas/AltitudeAccuracyEnumG'
+        altitudeAccuracyCodedError:
+          $ref: '#/components/schemas/PositionConfidenceCodedErrorEnumG'
+        altitudeConfidenceExtensionG:
+          additionalProperties: true
+          title: ExtensionTypeG
+          type: object
+      title: AltitudeConfidence
+      type: object
+    AltitudeAccuracyEnumG:
+      additionalProperties: false
+      properties:
+        value:
+          $ref: '#/components/schemas/AltitudeAccuracyEnum'
+        extendedValueG:
+          title: extendedValueG
+          type: string
+      required:
+      - value
+      title: AltitudeAccuracyEnumG
+      type: object
+    AltitudeAccuracyEnum:
+      enum:
+      - equalToOrLessThan1Centimetre
+      - equalToOrLessThan2Centimetres
+      - equalToOrLessThan5Centimetres
+      - equalToOrLessThan10Centimetres
+      - equalToOrLessThan20Centimetres
+      - equalToOrLessThan50Centimetres
+      - equalToOrLessThan1Metre
+      - equalToOrLessThan2Metres
+      - equalToOrLessThan5Metres
+      - equalToOrLessThan10Metres
+      - equalToOrLessThan20Metres
+      - equalToOrLessThan50Metres
+      - equalToOrLessThan100Metres
+      - equalToOrLessThan200Metres
+      - extendedG
+      title: AltitudeAccuracyEnum
+      type: string
+    PositionConfidenceCodedErrorEnumG:
+      additionalProperties: false
+      properties:
+        value:
+          $ref: '#/components/schemas/PositionConfidenceCodedErrorEnum'
+        extendedValueG:
+          title: extendedValueG
+          type: string
+      required:
+      - value
+      title: PositionConfidenceCodedErrorEnumG
+      type: object
+    PositionConfidenceCodedErrorEnum:
+      enum:
+      - outOfRange
+      - unavailable
+      - extendedG
+      title: PositionConfidenceCodedErrorEnum
+      type: string
+    PositionAccuracy:
+      additionalProperties: false
+      properties:
+        accuracyPercentile50:
+          title: Float
+          type: number
+        accuracyPercentile75:
+          title: Float
+          type: number
+        accuracyPercentile95:
+          title: Float
+          type: number
+        positionAccuracyExtensionG:
+          additionalProperties: true
+          title: ExtensionTypeG
+          type: object
+      title: PositionAccuracy
+      type: object
+    PositionConfidenceEllipse:
+      additionalProperties: false
+      properties:
+        semiMajorAxisLength:
+          title: Float
+          type: number
+        semiMajorAxisLengthCodedError:
+          $ref: '#/components/schemas/PositionConfidenceCodedErrorEnumG'
+        semiMinorAxisLength:
+          title: Float
+          type: number
+        semiMinorAxisLengthCodedError:
+          $ref: '#/components/schemas/PositionConfidenceCodedErrorEnumG'
+        semiMajorAxisOrientation:
+          minimum: 0.0
+          title: NonNegativeInteger
+          type: integer
+        semiMajorAxisOrientationError:
+          title: Boolean
+          type: boolean
+        positionConfidenceEllipseExtensionG:
+          additionalProperties: true
+          title: ExtensionTypeG
+          type: object
+      title: PositionConfidenceEllipse
+      type: object
+    SupplementaryPositionalDescription:
+      additionalProperties: false
+      properties:
+        locationDescription:
+          $ref: '#/components/schemas/MultilingualString'
+        carriageway:
+          items:
+            $ref: '#/components/schemas/Carriageway'
+          minItems: 0
+          title: carriageway
+          type: array
+        namedArea:
+          $ref: '#/components/schemas/NamedAreaG'
+        roadInformation:
+          items:
+            $ref: '#/components/schemas/RoadInformationG'
+          minItems: 0
+          title: roadInformation
+          type: array
+        supplementaryPositionalDescriptionExtensionG:
+          additionalProperties: true
+          title: ExtensionTypeG
+          type: object
+      title: SupplementaryPositionalDescription
+      type: object
+    Carriageway:
+      additionalProperties: false
+      properties:
+        carriageway:
+          $ref: '#/components/schemas/CarriagewayEnumG'
+        originalNumberOfLanes:
+          title: Integer
+          type: integer
+        lane:
+          items:
+            $ref: '#/components/schemas/Lane'
+          minItems: 0
+          title: lane
+          type: array
+        carriagewayExtensionG:
+          additionalProperties: true
+          title: ExtensionTypeG
+          type: object
+      required:
+      - carriageway
+      title: Carriageway
+      type: object
+    CarriagewayEnumG:
+      additionalProperties: false
+      properties:
+        value:
+          $ref: '#/components/schemas/CarriagewayEnum'
+        extendedValueG:
+          title: extendedValueG
+          type: string
+      required:
+      - value
+      title: CarriagewayEnumG
+      type: object
+    CarriagewayEnum:
+      enum:
+      - connectingCarriageway
+      - cycleTrack
+      - entrySlipRoad
+      - exitSlipRoad
+      - flyover
+      - footpath
+      - leftHandParallelCarriageway
+      - leftHandFeederRoad
+      - mainCarriageway
+      - oppositeCarriageway
+      - parallelCarriageway
+      - rightHandFeederRoad
+      - rightHandParallelCarriageway
+      - roundabout
+      - serviceRoad
+      - slipRoads
+      - underpass
+      - unspecifiedCarriageway
+      - extendedG
+      title: CarriagewayEnum
+      type: string
+    Lane:
+      additionalProperties: false
+      properties:
+        laneNumber:
+          title: Integer
+          type: integer
+        laneUsage:
+          $ref: '#/components/schemas/LaneEnumG'
+        laneExtensionG:
+          additionalProperties: true
+          title: ExtensionTypeG
+          type: object
+      title: Lane
+      type: object
+    LaneEnumG:
+      additionalProperties: false
+      properties:
+        value:
+          $ref: '#/components/schemas/LaneEnum'
+        extendedValueG:
+          $ref: '#/components/schemas/LaneEnumExtensionTypeG'
+      required:
+      - value
+      title: LaneEnumG
+      type: object
+    LaneEnum:
+      enum:
+      - allLanesCompleteCarriageway
+      - busLane
+      - busStop
+      - carPoolLane
+      - centralReservation
+      - crawlerLane
+      - cycleLane
+      - emergencyLane
+      - escapeLane
+      - expressLane
+      - hardShoulder
+      - heavyVehicleLane
+      - layBy
+      - leftHandTurningLane
+      - leftLane
+      - localTrafficLane
+      - middleLane
+      - overtakingLane
+      - rightHandTurningLane
+      - rightLane
+      - rushHourLane
+      - setDownArea
+      - slowVehicleLane
+      - throughTrafficLane
+      - tidalFlowLane
+      - turningLane
+      - verge
+      - extendedG
+      title: LaneEnum
+      type: string
+    LaneEnumExtensionTypeG:
+      enum:
+      - advisoryCycleLane
+      - bridlePath
+      - busAndCycleLane
+      - footAndCyclePath
+      - guidedBusWay
+      - taxiLane
+      - taxiRank
+      - tollLane
+      - trolleyBusLane
+      title: LaneEnumExtensionTypeG
+      type: string
+    NamedAreaG:
+      additionalProperties: false
+      properties:
+        locNamedArea:
+          $ref: '#/components/schemas/NamedArea'
+        locNutsNamedArea:
+          $ref: '#/components/schemas/NutsNamedArea'
+        locIsoNamedArea:
+          $ref: '#/components/schemas/IsoNamedArea'
+        locxNamedAreaExtended:
+          $ref: '#/components/schemas/NamedAreaExtended'
+      title: NamedAreaG
+      type: object
+    NamedArea:
+      additionalProperties: false
+      properties:
+        areaName:
+          $ref: '#/components/schemas/MultilingualString'
+        namedAreaType:
+          $ref: '#/components/schemas/NamedAreaTypeEnumG'
+        country:
+          maxLength: 1024
+          title: String
+          type: string
+        namedAreaExtensionG:
+          additionalProperties: true
+          title: ExtensionTypeG
+          type: object
+      required:
+      - areaName
+      title: NamedArea
+      type: object
+    NamedAreaTypeEnumG:
+      additionalProperties: false
+      properties:
+        value:
+          $ref: '#/components/schemas/NamedAreaTypeEnum'
+        extendedValueG:
+          title: extendedValueG
+          type: string
+      required:
+      - value
+      title: NamedAreaTypeEnumG
+      type: object
+    NamedAreaTypeEnum:
+      enum:
+      - applicationRegion
+      - continent
+      - country
+      - countryGroup
+      - carParkArea
+      - carpoolArea
+      - fuzzyArea
+      - industrialArea
+      - lake
+      - meteorologicalArea
+      - metropolitanArea
+      - municipality
+      - parkAndRideSite
+      - ruralCounty
+      - sea
+      - touristArea
+      - trafficArea
+      - urbanCounty
+      - order1AdministrativeArea
+      - order2AdministrativeArea
+      - order3AdministrativeArea
+      - order4AdministrativeArea
+      - order5AdministrativeArea
+      - policeForceControlArea
+      - roadOperatorControlArea
+      - waterArea
+      - extendedG
+      title: NamedAreaTypeEnum
+      type: string
+    NutsNamedArea:
+      additionalProperties: false
+      properties:
+        areaName:
+          $ref: '#/components/schemas/MultilingualString'
+        namedAreaType:
+          $ref: '#/components/schemas/NamedAreaTypeEnumG'
+        country:
+          maxLength: 1024
+          title: String
+          type: string
+        nutsCodeType:
+          $ref: '#/components/schemas/NutsCodeTypeEnumG'
+        nutsCode:
+          maxLength: 1024
+          title: String
+          type: string
+        namedAreaExtensionG:
+          additionalProperties: true
+          title: ExtensionTypeG
+          type: object
+      required:
+      - areaName
+      - nutsCode
+      - nutsCodeType
+      title: NutsNamedArea
+      type: object
+    NutsCodeTypeEnumG:
+      additionalProperties: false
+      properties:
+        value:
+          $ref: '#/components/schemas/NutsCodeTypeEnum'
+        extendedValueG:
+          title: extendedValueG
+          type: string
+      required:
+      - value
+      title: NutsCodeTypeEnumG
+      type: object
+    NutsCodeTypeEnum:
+      enum:
+      - nuts1Code
+      - nuts2Code
+      - nuts3Code
+      - lau1Code
+      - lau2Code
+      - extendedG
+      title: NutsCodeTypeEnum
+      type: string
+    NutsCode:
+      $ref: '#/components/schemas/String'
+    IsoNamedArea:
+      additionalProperties: false
+      properties:
+        areaName:
+          $ref: '#/components/schemas/MultilingualString'
+        namedAreaType:
+          $ref: '#/components/schemas/NamedAreaTypeEnumG'
+        country:
+          maxLength: 1024
+          title: String
+          type: string
+        subdivisionType:
+          $ref: '#/components/schemas/SubdivisionTypeEnumG'
+        subdivisionCode:
+          maxLength: 1024
+          title: String
+          type: string
+        namedAreaExtensionG:
+          additionalProperties: true
+          title: ExtensionTypeG
+          type: object
+      required:
+      - areaName
+      - subdivisionCode
+      - subdivisionType
+      title: IsoNamedArea
+      type: object
+    SubdivisionTypeEnumG:
+      additionalProperties: false
+      properties:
+        value:
+          $ref: '#/components/schemas/SubdivisionTypeEnum'
+        extendedValueG:
+          title: extendedValueG
+          type: string
+      required:
+      - value
+      title: SubdivisionTypeEnumG
+      type: object
+    SubdivisionTypeEnum:
+      enum:
+      - administrativeAtoll
+      - administrativeRegion
+      - administrativeTerritory
+      - arcticRegion
+      - autonomousCity
+      - autonomousCityInNorthAfrica
+      - autonomousCommunity
+      - autonomousDistrict
+      - autonomousProvince
+      - autonomousRegion
+      - canton
+      - capitalCity
+      - city
+      - cityMunicipality
+      - cityOfCountyRight
+      - commune
+      - councilArea
+      - county
+      - country
+      - department
+      - dependency
+      - district
+      - districtMunicipality
+      - districtWithSpecialStatus
+      - entity
+      - geographicalEntity
+      - governorate
+      - laender
+      - localCouncil
+      - londonBorough
+      - metropolitanArea
+      - metropolitanDepartment
+      - metropolitanDistrict
+      - metropolitanRegion
+      - municipality
+      - overseasDepartment
+      - overseasRegion
+      - overseasTerritorialCollectivity
+      - parish
+      - province
+      - quarter
+      - region
+      - republic
+      - republicanCity
+      - selfGovernedPart
+      - specialMunicipality
+      - state
+      - territorialUnit
+      - territory
+      - twoTierCounty
+      - unitaryAuthority
+      - ward
+      - other
+      - extendedG
+      title: SubdivisionTypeEnum
+      type: string
+    SubdivisionCode:
+      $ref: '#/components/schemas/String'
+    RoadInformationG:
+      additionalProperties: false
+      properties:
+        locRoadInformation:
+          $ref: '#/components/schemas/RoadInformation'
+        prkRoadInformationEnhanced:
+          $ref: '#/components/schemas/RoadInformationEnhanced'
+      title: RoadInformationG
+      type: object
+    RoadInformation:
+      additionalProperties: false
+      properties:
+        roadDestination:
+          maxLength: 1024
+          title: String
+          type: string
+        roadName:
+          maxLength: 1024
+          title: String
+          type: string
+        roadNumber:
+          maxLength: 1024
+          title: String
+          type: string
+        roadInformationExtensionG:
+          additionalProperties: true
+          title: ExtensionTypeG
+          type: object
+      title: RoadInformation
+      type: object
+    GmlLineStringG:
+      additionalProperties: false
+      properties:
+        locGmlLineString:
+          $ref: '#/components/schemas/GmlLineString'
+        locGmlLinearRing:
+          $ref: '#/components/schemas/GmlLinearRing'
+      title: GmlLineStringG
+      type: object
+    GmlLineString:
+      additionalProperties: false
+      properties:
+        srsDimension:
+          minimum: 0.0
+          title: NonNegativeInteger
+          type: integer
+        srsName:
+          maxLength: 1024
+          title: String
+          type: string
+        posList:
+          title: LongString
+          type: string
+        gmlLineStringExtensionG:
+          additionalProperties: true
+          title: ExtensionTypeG
+          type: object
+      required:
+      - posList
+      title: GmlLineString
+      type: object
+    GmlPosList:
+      $ref: '#/components/schemas/LongString'
+    LongString:
+      title: LongString
+      type: string
+    GmlLinearRing:
+      additionalProperties: false
+      properties:
+        srsDimension:
+          minimum: 0.0
+          title: NonNegativeInteger
+          type: integer
+        srsName:
+          maxLength: 1024
+          title: String
+          type: string
+        posList:
+          title: LongString
+          type: string
+        gmlLineStringExtensionG:
+          additionalProperties: true
+          title: ExtensionTypeG
+          type: object
+        gmlLinearRingExtensionG:
+          additionalProperties: true
+          title: ExtensionTypeG
+          type: object
+      required:
+      - posList
+      title: GmlLinearRing
+      type: object
+    SingleRoadLinearLocation:
+      additionalProperties: false
+      properties:
+        coordinatesForDisplay:
+          $ref: '#/components/schemas/PointCoordinates'
+        supplementaryPositionalDescription:
+          $ref: '#/components/schemas/SupplementaryPositionalDescription'
+        gmlLineString:
+          $ref: '#/components/schemas/GmlLineStringG'
+        alertCLinear:
+          items:
+            $ref: '#/components/schemas/AlertCLinearG'
+          minItems: 0
+          title: alertCLinear
+          type: array
+        locationReferenceExtensionG:
+          additionalProperties: true
+          title: ExtensionTypeG
+          type: object
+        locationExtensionG:
+          additionalProperties: true
+          title: ExtensionTypeG
+          type: object
+        networkLocationExtensionG:
+          additionalProperties: true
+          title: ExtensionTypeG
+          type: object
+        linearLocationExtensionG:
+          additionalProperties: true
+          title: ExtensionTypeG
+          type: object
+        singleRoadLinearLocationExtensionG:
+          additionalProperties: true
+          title: ExtensionTypeG
+          type: object
+      title: SingleRoadLinearLocation
+      type: object
+    AlertCLinearG:
+      additionalProperties: false
+      properties:
+        locAlertCLinearByCode:
+          $ref: '#/components/schemas/AlertCLinearByCode'
+        locAlertCMethod4Linear:
+          $ref: '#/components/schemas/AlertCMethod4Linear'
+        locAlertCMethod2Linear:
+          $ref: '#/components/schemas/AlertCMethod2Linear'
+      title: AlertCLinearG
+      type: object
+    AlertCLinearByCode:
+      additionalProperties: false
+      properties:
+        alertCLocationCountryCode:
+          maxLength: 1024
+          title: String
+          type: string
+        alertCLocationTableNumber:
+          maxLength: 1024
+          title: String
+          type: string
+        alertCLocationTableVersion:
+          maxLength: 1024
+          title: String
+          type: string
+        alertCDirection:
+          $ref: '#/components/schemas/AlertCDirection'
+        locationCodeForLinearLocation:
+          $ref: '#/components/schemas/AlertCLocation'
+        alertCLinearExtensionG:
+          additionalProperties: true
+          title: ExtensionTypeG
+          type: object
+        alertCLinearByCodeExtensionG:
+          additionalProperties: true
+          title: ExtensionTypeG
+          type: object
+      required:
+      - alertCDirection
+      - alertCLocationCountryCode
+      - alertCLocationTableNumber
+      - alertCLocationTableVersion
+      - locationCodeForLinearLocation
+      title: AlertCLinearByCode
+      type: object
+    AlertCDirection:
+      additionalProperties: false
+      properties:
+        alertCDirectionCoded:
+          $ref: '#/components/schemas/AlertCDirectionEnumG'
+        alertCDirectionNamed:
+          $ref: '#/components/schemas/MultilingualString'
+        alertCAffectedDirection:
+          $ref: '#/components/schemas/LinearDirectionEnumG'
+        alertCDirectionExtensionG:
+          additionalProperties: true
+          title: ExtensionTypeG
+          type: object
+      required:
+      - alertCAffectedDirection
+      - alertCDirectionCoded
+      title: AlertCDirection
+      type: object
+    AlertCDirectionEnumG:
+      additionalProperties: false
+      properties:
+        value:
+          $ref: '#/components/schemas/AlertCDirectionEnum'
+        extendedValueG:
+          title: extendedValueG
+          type: string
+      required:
+      - value
+      title: AlertCDirectionEnumG
+      type: object
+    AlertCDirectionEnum:
+      enum:
+      - negative
+      - positive
+      - extendedG
+      title: AlertCDirectionEnum
+      type: string
+    LinearDirectionEnumG:
+      additionalProperties: false
+      properties:
+        value:
+          $ref: '#/components/schemas/LinearDirectionEnum'
+        extendedValueG:
+          title: extendedValueG
+          type: string
+      required:
+      - value
+      title: LinearDirectionEnumG
+      type: object
+    LinearDirectionEnum:
+      enum:
+      - both
+      - opposite
+      - aligned
+      - unknown
+      - extendedG
+      title: LinearDirectionEnum
+      type: string
+    AlertCLocation:
+      additionalProperties: false
+      properties:
+        alertCLocationName:
+          $ref: '#/components/schemas/MultilingualString'
+        specificLocation:
+          minimum: 0.0
+          title: NonNegativeInteger
+          type: integer
+        alertCLocationExtensionG:
+          additionalProperties: true
+          title: ExtensionTypeG
+          type: object
+      required:
+      - specificLocation
+      title: AlertCLocation
+      type: object
+    AlertCLocationCode:
+      $ref: '#/components/schemas/NonNegativeInteger'
+    AlertCMethod4Linear:
+      additionalProperties: false
+      properties:
+        alertCLocationCountryCode:
+          maxLength: 1024
+          title: String
+          type: string
+        alertCLocationTableNumber:
+          maxLength: 1024
+          title: String
+          type: string
+        alertCLocationTableVersion:
+          maxLength: 1024
+          title: String
+          type: string
+        alertCDirection:
+          $ref: '#/components/schemas/AlertCDirection'
+        alertCMethod4PrimaryPointLocation:
+          $ref: '#/components/schemas/AlertCMethod4PrimaryPointLocation'
+        alertCMethod4SecondaryPointLocation:
+          $ref: '#/components/schemas/AlertCMethod4SecondaryPointLocation'
+        alertCLinearExtensionG:
+          additionalProperties: true
+          title: ExtensionTypeG
+          type: object
+        alertCMethod4LinearExtensionG:
+          additionalProperties: true
+          title: ExtensionTypeG
+          type: object
+      required:
+      - alertCDirection
+      - alertCLocationCountryCode
+      - alertCLocationTableNumber
+      - alertCLocationTableVersion
+      - alertCMethod4PrimaryPointLocation
+      - alertCMethod4SecondaryPointLocation
+      title: AlertCMethod4Linear
+      type: object
+    AlertCMethod4PrimaryPointLocation:
+      additionalProperties: false
+      properties:
+        alertCLocation:
+          $ref: '#/components/schemas/AlertCLocation'
+        offsetDistance:
+          $ref: '#/components/schemas/OffsetDistance'
+        alertCMethod4PrimaryPointLocationExtensionG:
+          additionalProperties: true
+          title: ExtensionTypeG
+          type: object
+      required:
+      - alertCLocation
+      - offsetDistance
+      title: AlertCMethod4PrimaryPointLocation
+      type: object
+    OffsetDistance:
+      additionalProperties: false
+      properties:
+        offsetDistance:
+          minimum: 0.0
+          title: NonNegativeInteger
+          type: integer
+        offsetDistanceExtensionG:
+          additionalProperties: true
+          title: ExtensionTypeG
+          type: object
+      required:
+      - offsetDistance
+      title: OffsetDistance
+      type: object
+    AlertCMethod4SecondaryPointLocation:
+      additionalProperties: false
+      properties:
+        alertCLocation:
+          $ref: '#/components/schemas/AlertCLocation'
+        offsetDistance:
+          $ref: '#/components/schemas/OffsetDistance'
+        alertCMethod4SecondaryPointLocationExtensionG:
+          additionalProperties: true
+          title: ExtensionTypeG
+          type: object
+      required:
+      - alertCLocation
+      - offsetDistance
+      title: AlertCMethod4SecondaryPointLocation
+      type: object
+    AlertCMethod2Linear:
+      additionalProperties: false
+      properties:
+        alertCLocationCountryCode:
+          maxLength: 1024
+          title: String
+          type: string
+        alertCLocationTableNumber:
+          maxLength: 1024
+          title: String
+          type: string
+        alertCLocationTableVersion:
+          maxLength: 1024
+          title: String
+          type: string
+        alertCDirection:
+          $ref: '#/components/schemas/AlertCDirection'
+        alertCMethod2PrimaryPointLocation:
+          $ref: '#/components/schemas/AlertCMethod2PrimaryPointLocation'
+        alertCMethod2SecondaryPointLocation:
+          $ref: '#/components/schemas/AlertCMethod2SecondaryPointLocation'
+        alertCLinearExtensionG:
+          additionalProperties: true
+          title: ExtensionTypeG
+          type: object
+        alertCMethod2LinearExtensionG:
+          additionalProperties: true
+          title: ExtensionTypeG
+          type: object
+      required:
+      - alertCDirection
+      - alertCLocationCountryCode
+      - alertCLocationTableNumber
+      - alertCLocationTableVersion
+      - alertCMethod2PrimaryPointLocation
+      - alertCMethod2SecondaryPointLocation
+      title: AlertCMethod2Linear
+      type: object
+    AlertCMethod2PrimaryPointLocation:
+      additionalProperties: false
+      properties:
+        alertCLocation:
+          $ref: '#/components/schemas/AlertCLocation'
+        alertCMethod2PrimaryPointLocationExtensionG:
+          additionalProperties: true
+          title: ExtensionTypeG
+          type: object
+      required:
+      - alertCLocation
+      title: AlertCMethod2PrimaryPointLocation
+      type: object
+    AlertCMethod2SecondaryPointLocation:
+      additionalProperties: false
+      properties:
+        alertCLocation:
+          $ref: '#/components/schemas/AlertCLocation'
+        alertCMethod2SecondaryPointLocationExtensionG:
+          additionalProperties: true
+          title: ExtensionTypeG
+          type: object
+      required:
+      - alertCLocation
+      title: AlertCMethod2SecondaryPointLocation
+      type: object
+    PointLocation:
+      additionalProperties: false
+      properties:
+        coordinatesForDisplay:
+          $ref: '#/components/schemas/PointCoordinates'
+        supplementaryPositionalDescription:
+          $ref: '#/components/schemas/SupplementaryPositionalDescription'
+        pointByCoordinates:
+          $ref: '#/components/schemas/PointByCoordinates'
+        alertCPoint:
+          items:
+            $ref: '#/components/schemas/AlertCPointG'
+          minItems: 0
+          title: alertCPoint
+          type: array
+        locationReferenceExtensionG:
+          additionalProperties: true
+          title: ExtensionTypeG
+          type: object
+        locationExtensionG:
+          additionalProperties: true
+          title: ExtensionTypeG
+          type: object
+        networkLocationExtensionG:
+          additionalProperties: true
+          title: ExtensionTypeG
+          type: object
+        pointLocationExtensionG:
+          additionalProperties: true
+          title: ExtensionTypeG
+          type: object
+      title: PointLocation
+      type: object
+    PointByCoordinates:
+      additionalProperties: false
+      properties:
+        bearing:
+          minimum: 0.0
+          title: NonNegativeInteger
+          type: integer
+        pointCoordinates:
+          $ref: '#/components/schemas/PointCoordinates'
+        pointByCoordinatesExtensionG:
+          additionalProperties: true
+          title: ExtensionTypeG
+          type: object
+      required:
+      - pointCoordinates
+      title: PointByCoordinates
+      type: object
+    AlertCPointG:
+      additionalProperties: false
+      properties:
+        locAlertCMethod2Point:
+          $ref: '#/components/schemas/AlertCMethod2Point'
+        locAlertCMethod4Point:
+          $ref: '#/components/schemas/AlertCMethod4Point'
+      title: AlertCPointG
+      type: object
+    AlertCMethod2Point:
+      additionalProperties: false
+      properties:
+        alertCLocationCountryCode:
+          maxLength: 1024
+          title: String
+          type: string
+        alertCLocationTableNumber:
+          maxLength: 1024
+          title: String
+          type: string
+        alertCLocationTableVersion:
+          maxLength: 1024
+          title: String
+          type: string
+        alertCDirection:
+          $ref: '#/components/schemas/AlertCDirection'
+        alertCMethod2PrimaryPointLocation:
+          $ref: '#/components/schemas/AlertCMethod2PrimaryPointLocation'
+        alertCPointExtensionG:
+          additionalProperties: true
+          title: ExtensionTypeG
+          type: object
+        alertCMethod2PointExtensionG:
+          additionalProperties: true
+          title: ExtensionTypeG
+          type: object
+      required:
+      - alertCDirection
+      - alertCLocationCountryCode
+      - alertCLocationTableNumber
+      - alertCLocationTableVersion
+      - alertCMethod2PrimaryPointLocation
+      title: AlertCMethod2Point
+      type: object
+    AlertCMethod4Point:
+      additionalProperties: false
+      properties:
+        alertCLocationCountryCode:
+          maxLength: 1024
+          title: String
+          type: string
+        alertCLocationTableNumber:
+          maxLength: 1024
+          title: String
+          type: string
+        alertCLocationTableVersion:
+          maxLength: 1024
+          title: String
+          type: string
+        alertCDirection:
+          $ref: '#/components/schemas/AlertCDirection'
+        alertCMethod4PrimaryPointLocation:
+          $ref: '#/components/schemas/AlertCMethod4PrimaryPointLocation'
+        alertCPointExtensionG:
+          additionalProperties: true
+          title: ExtensionTypeG
+          type: object
+        alertCMethod4PointExtensionG:
+          additionalProperties: true
+          title: ExtensionTypeG
+          type: object
+      required:
+      - alertCDirection
+      - alertCLocationCountryCode
+      - alertCLocationTableNumber
+      - alertCLocationTableVersion
+      - alertCMethod4PrimaryPointLocation
+      title: AlertCMethod4Point
+      type: object
+    Vehicle:
+      additionalProperties: false
+      properties:
+        anonymizedVehicleReference:
+          maxLength: 1024
+          title: String
+          type: string
+        vehicleColour:
+          $ref: '#/components/schemas/MultilingualString'
+        vehicleCountryOfOrigin:
+          maxLength: 1024
+          title: String
+          type: string
+        vehicleIdentifier:
+          maxLength: 1024
+          title: String
+          type: string
+        vehicleManufacturer:
+          maxLength: 1024
+          title: String
+          type: string
+        vehicleModel:
+          maxLength: 1024
+          title: String
+          type: string
+        vehicleRegistrationPlateIdentifier:
+          maxLength: 1024
+          title: String
+          type: string
+        vehicleStatus:
+          $ref: '#/components/schemas/VehicleStatusEnumG'
+        vehicleCharacteristics:
+          $ref: '#/components/schemas/VehicleCharacteristics'
+        axleSpacingOnVehicle:
+          items:
+            $ref: '#/components/schemas/AxleSpacing'
+          minItems: 0
+          title: axleSpacingOnVehicle
+          type: array
+        specificAxleWeight:
+          items:
+            $ref: '#/components/schemas/AxleWeight'
+          minItems: 0
+          title: specificAxleWeight
+          type: array
+        hazardousGoodsAssociatedWithVehicle:
+          $ref: '#/components/schemas/HazardousMaterials'
+        vehicleExtensionG:
+          additionalProperties: true
+          title: ExtensionTypeG
+          type: object
+      title: Vehicle
+      type: object
+    VehicleStatusEnumG:
+      additionalProperties: false
+      properties:
+        value:
+          $ref: '#/components/schemas/VehicleStatusEnum'
+        extendedValueG:
+          title: extendedValueG
+          type: string
+      required:
+      - value
+      title: VehicleStatusEnumG
+      type: object
+    VehicleStatusEnum:
+      enum:
+      - abandoned
+      - brokenDown
+      - burntOut
+      - damaged
+      - damagedAndImmobilized
+      - inDitch
+      - jacknifed
+      - offRoad
+      - onFire
+      - onTopOfCrashBarrier
+      - onWheels
+      - overturned
+      - rollable
+      - spunAround
+      - extendedG
+      title: VehicleStatusEnum
+      type: string
+    VehicleCharacteristics:
+      additionalProperties: false
+      properties:
+        fuelType:
+          items:
+            $ref: '#/components/schemas/FuelTypeEnumG'
+          minItems: 0
+          title: fuelType
+          type: array
+        loadType:
+          $ref: '#/components/schemas/LoadTypeEnumG'
+        vehicleEquipment:
+          $ref: '#/components/schemas/VehicleEquipmentEnumG'
+        vehicleType:
+          items:
+            $ref: '#/components/schemas/VehicleTypeEnumG'
+          minItems: 0
+          title: vehicleType
+          type: array
+        vehicleUsage:
+          $ref: '#/components/schemas/VehicleUsageEnumG'
+        yearOfFirstRegistration:
+          minimum: 0.0
+          title: NonNegativeInteger
+          type: integer
+        grossWeightCharacteristic:
+          items:
+            $ref: '#/components/schemas/GrossWeightCharacteristic'
+          maxItems: 2
+          minItems: 0
+          title: grossWeightCharacteristic
+          type: array
+        heightCharacteristic:
+          items:
+            $ref: '#/components/schemas/HeightCharacteristic'
+          maxItems: 2
+          minItems: 0
+          title: heightCharacteristic
+          type: array
+        lengthCharacteristic:
+          items:
+            $ref: '#/components/schemas/LengthCharacteristic'
+          maxItems: 2
+          minItems: 0
+          title: lengthCharacteristic
+          type: array
+        widthCharacteristic:
+          items:
+            $ref: '#/components/schemas/WidthCharacteristic'
+          maxItems: 2
+          minItems: 0
+          title: widthCharacteristic
+          type: array
+        heaviestAxleWeightCharacteristic:
+          items:
+            $ref: '#/components/schemas/HeaviestAxleWeightCharacteristic'
+          maxItems: 2
+          minItems: 0
+          title: heaviestAxleWeightCharacteristic
+          type: array
+        numberOfAxlesCharacteristic:
+          items:
+            $ref: '#/components/schemas/NumberOfAxlesCharacteristic'
+          maxItems: 2
+          minItems: 0
+          title: numberOfAxlesCharacteristic
+          type: array
+        emissions:
+          $ref: '#/components/schemas/Emissions'
+        vehicleCharacteristicsExtensionG:
+          additionalProperties: true
+          title: ExtensionTypeG
+          type: object
+      title: VehicleCharacteristics
+      type: object
+    FuelTypeEnumG:
+      additionalProperties: false
+      properties:
+        value:
+          $ref: '#/components/schemas/FuelTypeEnum'
+        extendedValueG:
+          title: extendedValueG
+          type: string
+      required:
+      - value
+      title: FuelTypeEnumG
+      type: object
+    FuelTypeEnum:
+      enum:
+      - all
+      - battery
+      - biodiesel
+      - diesel
+      - dieselBatteryHybrid
+      - ethanol
+      - hydrogen
+      - liquidGas
+      - lpg
+      - methane
+      - petrol
+      - petrol95Octane
+      - petrol98Octane
+      - petrolBatteryHybrid
+      - petrolLeaded
+      - petrolUnleaded
+      - unknown
+      - other
+      - extendedG
+      title: FuelTypeEnum
+      type: string
+    LoadTypeEnumG:
+      additionalProperties: false
+      properties:
+        value:
+          $ref: '#/components/schemas/LoadTypeEnum'
+        extendedValueG:
+          title: extendedValueG
+          type: string
+      required:
+      - value
+      title: LoadTypeEnumG
+      type: object
+    LoadTypeEnum:
+      enum:
+      - abnormalLoad
+      - ammunition
+      - chemicals
+      - combustibleMaterials
+      - corrosiveMaterials
+      - debris
+      - empty
+      - explosiveMaterials
+      - extraHighLoad
+      - extraLongLoad
+      - extraWideLoad
+      - fuel
+      - glass
+      - goods
+      - hazardousMaterials
+      - liquid
+      - livestock
+      - materials
+      - materialsDangerousForPeople
+      - materialsDangerousForTheEnvironment
+      - materialsDangerousForWater
+      - oil
+      - ordinary
+      - perishableProducts
+      - petrol
+      - pharmaceuticalMaterials
+      - radioactiveMaterials
+      - refrigeratedGoods
+      - refuse
+      - toxicMaterials
+      - vehicles
+      - other
+      - extendedG
+      title: LoadTypeEnum
+      type: string
+    VehicleEquipmentEnumG:
+      additionalProperties: false
+      properties:
+        value:
+          $ref: '#/components/schemas/VehicleEquipmentEnum'
+        extendedValueG:
+          title: extendedValueG
+          type: string
+      required:
+      - value
+      title: VehicleEquipmentEnumG
+      type: object
+    VehicleEquipmentEnum:
+      enum:
+      - notUsingSnowChains
+      - notUsingSnowChainsOrTyres
+      - snowChainsInUse
+      - snowTyresInUse
+      - snowChainsOrTyresInUse
+      - withoutSnowTyresOrChainsOnBoard
+      - extendedG
+      title: VehicleEquipmentEnum
+      type: string
+    VehicleTypeEnumG:
+      additionalProperties: false
+      properties:
+        value:
+          $ref: '#/components/schemas/VehicleTypeEnum'
+        extendedValueG:
+          $ref: '#/components/schemas/VehicleTypeEnumExtensionTypeG'
+      required:
+      - value
+      title: VehicleTypeEnumG
+      type: object
+    VehicleTypeEnum:
+      enum:
+      - agriculturalVehicle
+      - anyVehicle
+      - articulatedBus
+      - articulatedTrolleyBus
+      - articulatedVehicle
+      - bicycle
+      - bus
+      - car
+      - caravan
+      - carOrLightVehicle
+      - carWithCaravan
+      - carWithTrailer
+      - constructionOrMaintenanceVehicle
+      - fourWheelDrive
+      - heavyGoodsVehicle
+      - heavyGoodsVehicleWithTrailer
+      - heavyDutyTransporter
+      - heavyVehicle
+      - highSidedVehicle
+      - lightCommercialVehicle
+      - largeCar
+      - largeGoodsVehicle
+      - lightCommercialVehicleWithTrailer
+      - longHeavyLorry
+      - lorry
+      - metro
+      - minibus
+      - moped
+      - motorcycle
+      - motorcycleWithSideCar
+      - motorhome
+      - motorscooter
+      - passengerCar
+      - smallCar
+      - tanker
+      - threeWheeledVehicle
+      - trailer
+      - tram
+      - trolleyBus
+      - twoWheeledVehicle
+      - van
+      - vehicleWithCaravan
+      - vehicleWithCatalyticConverter
+      - vehicleWithoutCatalyticConverter
+      - vehicleWithTrailer
+      - withEvenNumberedRegistrationPlates
+      - withOddNumberedRegistrationPlates
+      - unknown
+      - other
+      - extendedG
+      title: VehicleTypeEnum
+      type: string
+    VehicleTypeEnumExtensionTypeG:
+      enum:
+      - electricBike
+      - electricScooter
+      - personalLightElectricVehicle
+      title: VehicleTypeEnumExtensionTypeG
+      type: string
+    VehicleUsageEnumG:
+      additionalProperties: false
+      properties:
+        value:
+          $ref: '#/components/schemas/VehicleUsageEnum'
+        extendedValueG:
+          title: extendedValueG
+          type: string
+      required:
+      - value
+      title: VehicleUsageEnumG
+      type: object
+    VehicleUsageEnum:
+      enum:
+      - agricultural
+      - carSharing
+      - cityLogistics
+      - commercial
+      - emergencyServices
+      - military
+      - nonCommercial
+      - patrol
+      - recoveryServices
+      - roadMaintenanceOrConstruction
+      - roadOperator
+      - taxi
+      - extendedG
+      title: VehicleUsageEnum
+      type: string
+    Year:
+      $ref: '#/components/schemas/NonNegativeInteger'
+    GrossWeightCharacteristic:
+      additionalProperties: false
+      properties:
+        comparisonOperator:
+          $ref: '#/components/schemas/ComparisonOperatorEnumG'
+        grossVehicleWeight:
+          title: Float
+          type: number
+        typeOfWeight:
+          $ref: '#/components/schemas/WeightTypeEnumG'
+        grossWeightCharacteristicExtensionG:
+          additionalProperties: true
+          title: ExtensionTypeG
+          type: object
+      required:
+      - comparisonOperator
+      - grossVehicleWeight
+      - typeOfWeight
+      title: GrossWeightCharacteristic
+      type: object
+    ComparisonOperatorEnumG:
+      additionalProperties: false
+      properties:
+        value:
+          $ref: '#/components/schemas/ComparisonOperatorEnum'
+        extendedValueG:
+          title: extendedValueG
+          type: string
+      required:
+      - value
+      title: ComparisonOperatorEnumG
+      type: object
+    ComparisonOperatorEnum:
+      enum:
+      - equalTo
+      - greaterThan
+      - greaterThanOrEqualTo
+      - lessThan
+      - lessThanOrEqualTo
+      - extendedG
+      title: ComparisonOperatorEnum
+      type: string
+    Tonnes:
+      $ref: '#/components/schemas/Float'
+    Float:
+      title: Float
+      type: number
+    WeightTypeEnumG:
+      additionalProperties: false
+      properties:
+        value:
+          $ref: '#/components/schemas/WeightTypeEnum'
+        extendedValueG:
+          title: extendedValueG
+          type: string
+      required:
+      - value
+      title: WeightTypeEnumG
+      type: object
+    WeightTypeEnum:
+      enum:
+      - actual
+      - maximumPermitted
+      - extendedG
+      title: WeightTypeEnum
+      type: string
+    HeightCharacteristic:
+      additionalProperties: false
+      properties:
+        comparisonOperator:
+          $ref: '#/components/schemas/ComparisonOperatorEnumG'
+        vehicleHeight:
+          title: Float
+          type: number
+        heightCharacteristicExtensionG:
+          additionalProperties: true
+          title: ExtensionTypeG
+          type: object
+      required:
+      - comparisonOperator
+      - vehicleHeight
+      title: HeightCharacteristic
+      type: object
+    MetresAsFloat:
+      $ref: '#/components/schemas/Float'
+    LengthCharacteristic:
+      additionalProperties: false
+      properties:
+        comparisonOperator:
+          $ref: '#/components/schemas/ComparisonOperatorEnumG'
+        vehicleLength:
+          title: Float
+          type: number
+        lengthCharacteristicExtensionG:
+          additionalProperties: true
+          title: ExtensionTypeG
+          type: object
+      required:
+      - comparisonOperator
+      - vehicleLength
+      title: LengthCharacteristic
+      type: object
+    WidthCharacteristic:
+      additionalProperties: false
+      properties:
+        comparisonOperator:
+          $ref: '#/components/schemas/ComparisonOperatorEnumG'
+        vehicleWidth:
+          title: Float
+          type: number
+        widthCharacteristicExtensionG:
+          additionalProperties: true
+          title: ExtensionTypeG
+          type: object
+      required:
+      - comparisonOperator
+      - vehicleWidth
+      title: WidthCharacteristic
+      type: object
+    HeaviestAxleWeightCharacteristic:
+      additionalProperties: false
+      properties:
+        comparisonOperator:
+          $ref: '#/components/schemas/ComparisonOperatorEnumG'
+        heaviestAxleWeight:
+          title: Float
+          type: number
+        heaviestAxleWeightCharacteristicExtensionG:
+          additionalProperties: true
+          title: ExtensionTypeG
+          type: object
+      required:
+      - comparisonOperator
+      - heaviestAxleWeight
+      title: HeaviestAxleWeightCharacteristic
+      type: object
+    NumberOfAxlesCharacteristic:
+      additionalProperties: false
+      properties:
+        comparisonOperator:
+          $ref: '#/components/schemas/ComparisonOperatorEnumG'
+        numberOfAxles:
+          minimum: 0.0
+          title: NonNegativeInteger
+          type: integer
+        numberOfAxlesCharacteristicExtensionG:
+          additionalProperties: true
+          title: ExtensionTypeG
+          type: object
+      required:
+      - comparisonOperator
+      - numberOfAxles
+      title: NumberOfAxlesCharacteristic
+      type: object
+    Emissions:
+      additionalProperties: false
+      properties:
+        emissionClassificationEuro:
+          $ref: '#/components/schemas/EmissionClassificationEuroEnumG'
+        emissionClassificationOther:
+          items:
+            $ref: '#/components/schemas/String'
+          minItems: 0
+          title: emissionClassificationOther
+          type: array
+        emissionLevel:
+          $ref: '#/components/schemas/LowEmissionLevelEnumG'
+        emissionsExtensionG:
+          $ref: '#/components/schemas/EmissionsExtensionTypeG'
+      title: Emissions
+      type: object
+    EmissionClassificationEuroEnumG:
+      additionalProperties: false
+      properties:
+        value:
+          $ref: '#/components/schemas/EmissionClassificationEuroEnum'
+        extendedValueG:
+          $ref: '#/components/schemas/EmissionClassificationEuroEnumExtensionTypeG'
+      required:
+      - value
+      title: EmissionClassificationEuroEnumG
+      type: object
+    EmissionClassificationEuroEnum:
+      enum:
+      - euro5
+      - euro5a
+      - euro5b
+      - euro6
+      - euro6a
+      - euro6b
+      - euro6c
+      - euroV
+      - euroVI
+      - other
+      - extendedG
+      title: EmissionClassificationEuroEnum
+      type: string
+    EmissionClassificationEuroEnumExtensionTypeG:
+      enum:
+      - euro0
+      - euro1
+      - euro2
+      - euro3
+      - euro4
+      - euro6d
+      - euro6dTemp
+      - euroIV
+      - euroUnknown
+      - euroI
+      - euroII
+      - euroIII
+      title: EmissionClassificationEuroEnumExtensionTypeG
+      type: string
+    LowEmissionLevelEnumG:
+      additionalProperties: false
+      properties:
+        value:
+          $ref: '#/components/schemas/LowEmissionLevelEnum'
+        extendedValueG:
+          title: extendedValueG
+          type: string
+      required:
+      - value
+      title: LowEmissionLevelEnumG
+      type: object
+    LowEmissionLevelEnum:
+      enum:
+      - lowLevelEmission
+      - freeOfEmission
+      - extendedG
+      title: LowEmissionLevelEnum
+      type: string
+    EmissionsExtensionTypeG:
+      additionalProperties: true
+      properties:
+        EmissionsExtension:
+          $ref: '#/components/schemas/EmissionsExtension'
+      title: EmissionsExtensionTypeG
+      type: object
+    AxleSpacing:
+      additionalProperties: false
+      properties:
+        axleSpacing:
+          title: Float
+          type: number
+        axleSpacingSequenceIdentifier:
+          minimum: 0.0
+          title: NonNegativeInteger
+          type: integer
+        axleSpacingExtensionG:
+          additionalProperties: true
+          title: ExtensionTypeG
+          type: object
+      required:
+      - axleSpacing
+      - axleSpacingSequenceIdentifier
+      title: AxleSpacing
+      type: object
+    AxleWeight:
+      additionalProperties: false
+      properties:
+        axlePositionIdentifier:
+          minimum: 0.0
+          title: NonNegativeInteger
+          type: integer
+        axleWeight:
+          title: Float
+          type: number
+        maximumPermittedAxleWeight:
+          title: Float
+          type: number
+        axleWeightExtensionG:
+          additionalProperties: true
+          title: ExtensionTypeG
+          type: object
+      required:
+      - axlePositionIdentifier
+      title: AxleWeight
+      type: object
+    HazardousMaterials:
+      additionalProperties: false
+      properties:
+        chemicalName:
+          $ref: '#/components/schemas/MultilingualString'
+        dangerousGoodsFlashPoint:
+          title: Float
+          type: number
+        dangerousGoodsRegulations:
+          $ref: '#/components/schemas/DangerousGoodsRegulationsEnumG'
+        hazardCodeIdentification:
+          maxLength: 1024
+          title: String
+          type: string
+        hazardCodeVersionNumber:
+          minimum: 0.0
+          title: NonNegativeInteger
+          type: integer
+        hazardSubstanceItemPageNumber:
+          maxLength: 1024
+          title: String
+          type: string
+        tremCardNumber:
+          maxLength: 1024
+          title: String
+          type: string
+        undgNumber:
+          maxLength: 1024
+          title: String
+          type: string
+        volumeOfDangerousGoods:
+          title: Float
+          type: number
+        weightOfDangerousGoods:
+          title: Float
+          type: number
+        hazardousMaterialsExtensionG:
+          additionalProperties: true
+          title: ExtensionTypeG
+          type: object
+      required:
+      - chemicalName
+      title: HazardousMaterials
+      type: object
+    TemperatureCelsius:
+      $ref: '#/components/schemas/Float'
+    DangerousGoodsRegulationsEnumG:
+      additionalProperties: false
+      properties:
+        value:
+          $ref: '#/components/schemas/DangerousGoodsRegulationsEnum'
+        extendedValueG:
+          title: extendedValueG
+          type: string
+      required:
+      - value
+      title: DangerousGoodsRegulationsEnumG
+      type: object
+    DangerousGoodsRegulationsEnum:
+      enum:
+      - adr
+      - iataIcao
+      - imoImdg
+      - railroadDangerousGoodsBook
+      - extendedG
+      title: DangerousGoodsRegulationsEnum
+      type: string
+    CubicMetres:
+      $ref: '#/components/schemas/Float'
+    GroupOfVehiclesInvolved:
+      additionalProperties: false
+      properties:
+        numberOfVehicles:
+          minimum: 0.0
+          title: NonNegativeInteger
+          type: integer
+        vehicleStatus:
+          $ref: '#/components/schemas/VehicleStatusEnumG'
+        vehicleCharacteristics:
+          $ref: '#/components/schemas/VehicleCharacteristics'
+        groupOfVehiclesInvolvedExtensionG:
+          additionalProperties: true
+          title: ExtensionTypeG
+          type: object
+      title: GroupOfVehiclesInvolved
+      type: object
+    SituationPublication:
+      additionalProperties: false
+      properties:
+        lang:
+          title: Language
+          type: string
+        publicationTime:
+          format: date-time
+          title: DateTime
+          type: string
+        publicationCreator:
+          $ref: '#/components/schemas/InternationalIdentifier'
+        situation:
+          items:
+            $ref: '#/components/schemas/Situation'
+          minItems: 0
+          title: situation
+          type: array
+        payloadPublicationExtensionG:
+          additionalProperties: true
+          title: ExtensionTypeG
+          type: object
+        situationPublicationExtensionG:
+          additionalProperties: true
+          title: ExtensionTypeG
+          type: object
+      required:
+      - lang
+      - publicationCreator
+      - publicationTime
+      title: SituationPublication
+      type: object
+    VersionedReference:
+      properties:
+        idG:
+          title: idG
+          type: string
+        versionG:
+          title: versionG
+          type: string
+      required:
+      - idG
+      title: VersionedReference
+      type: object
+    AngleInDegrees:
+      $ref: '#/components/schemas/NonNegativeInteger'
+    Integer:
+      title: Integer
+      type: integer
+    NamedAreaExtended:
+      additionalProperties: false
+      properties:
+        namedAreaCode:
+          maxLength: 1024
+          title: String
+          type: string
+      required:
+      - namedAreaCode
+      title: NamedAreaExtended
+      type: object
+    NamedAreaCode:
+      $ref: '#/components/schemas/String'
+    RoadInformationEnhanced:
+      additionalProperties: false
+      properties:
+        roadDestination:
+          maxLength: 1024
+          title: String
+          type: string
+        roadName:
+          maxLength: 1024
+          title: String
+          type: string
+        roadNumber:
+          maxLength: 1024
+          title: String
+          type: string
+        typeOfRoad:
+          $ref: '#/components/schemas/RoadTypeEnumG'
+        roadOrigination:
+          items:
+            $ref: '#/components/schemas/MultilingualString'
+          minItems: 0
+          title: roadOrigination
+          type: array
+        roadInformationExtensionG:
+          additionalProperties: true
+          title: ExtensionTypeG
+          type: object
+        roadInformationEnhancedExtensionG:
+          additionalProperties: true
+          title: ExtensionTypeG
+          type: object
+      title: RoadInformationEnhanced
+      type: object
+    RoadTypeEnumG:
+      additionalProperties: false
+      properties:
+        value:
+          $ref: '#/components/schemas/RoadTypeEnum'
+        extendedValueG:
+          title: extendedValueG
+          type: string
+      required:
+      - value
+      title: RoadTypeEnumG
+      type: object
+    RoadTypeEnum:
+      enum:
+      - motorway
+      - trunkRoad
+      - mainRoad
+      - other
+      - extendedG
+      title: RoadTypeEnum
+      type: string
+    MetresAsNonNegativeInteger:
+      $ref: '#/components/schemas/NonNegativeInteger'
+    EmissionsExtension:
+      additionalProperties: false
+      properties:
+        comparisonOperator:
+          $ref: '#/components/schemas/ComparisonOperatorEnumG'
+      required:
+      - comparisonOperator
+      title: EmissionsExtension
+      type: object
+    Language:
+      title: Language
+      type: string
