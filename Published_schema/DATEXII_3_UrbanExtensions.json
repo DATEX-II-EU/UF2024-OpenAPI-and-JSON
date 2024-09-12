@@ -1,0 +1,157 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "definitions": {
+    "AccidentExtendedUrban": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "groupOfNonVehicularRoadUsersInvolved": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_UrbanExtensions.json#/definitions/GroupOfNonVehicularRoadUsersInvolved"
+          },
+          "minItems": 0
+        }
+      }
+    },
+    "ClassifiedDelay": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "delays": {
+          "$ref": "DATEXII_3_Situation.json#/definitions/Delays"
+        },
+        "vehicleCharacteristics": {
+          "$ref": "DATEXII_3_Common.json#/definitions/VehicleCharacteristics"
+        },
+        "classifiedDelayExtensionG": {
+          "$ref": "DATEXII_3_Common.json#/definitions/ExtensionTypeG"
+        }
+      },
+      "required": [
+        "vehicleCharacteristics",
+        "delays"
+      ]
+    },
+    "GroupOfNonVehicularRoadUsersInvolved": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "numberOfNonVehicularRoadUsers": {
+          "$ref": "DATEXII_3_Common.json#/definitions/NonNegativeInteger"
+        },
+        "injuryStatusType": {
+          "$ref": "DATEXII_3_Situation.json#/definitions/InjuryStatusTypeEnumG"
+        },
+        "nonVehicularRoadUsers": {
+          "$ref": "DATEXII_3_UrbanExtensions.json#/definitions/NonVehicularRoadUsers"
+        },
+        "groupOfNonVehicularRoadUsersInvolvedExtensionG": {
+          "$ref": "DATEXII_3_Common.json#/definitions/ExtensionTypeG"
+        }
+      }
+    },
+    "ImpactExtendedUrban": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "classifiedDelay": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_UrbanExtensions.json#/definitions/ClassifiedDelay"
+          },
+          "minItems": 0
+        }
+      }
+    },
+    "NetworkManagementExtendedUrban": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "forNonMotorisedRoadUsers": {
+          "$ref": "DATEXII_3_UrbanExtensions.json#/definitions/NonVehicularRoadUsers"
+        }
+      }
+    },
+    "NonVehicularRoadUsers": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "nonVehicularRoadUser": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_UrbanExtensions.json#/definitions/NonVehicularRoadUserTypeEnumG"
+          },
+          "minItems": 1
+        },
+        "nonVehicularRoadUsersExtensionG": {
+          "$ref": "DATEXII_3_Common.json#/definitions/ExtensionTypeG"
+        }
+      },
+      "required": [
+        "nonVehicularRoadUser"
+      ]
+    },
+    "NonVehicularRoadUserTypeEnum": {
+      "type": "string",
+      "enum": [
+        "pedestrian",
+        "skater",
+        "animalUnderGuidance",
+        "other",
+        "extendedG"
+      ]
+    },
+    "NonVehicularRoadUserTypeEnumG": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "value": {
+          "$ref": "DATEXII_3_UrbanExtensions.json#/definitions/NonVehicularRoadUserTypeEnum"
+        },
+        "extendedValueG": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "StreetWorks": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "streetWorksType": {
+          "$ref": "DATEXII_3_UrbanExtensions.json#/definitions/StreetWorksTypeEnumG"
+        }
+      },
+      "required": [
+        "streetWorksType"
+      ]
+    },
+    "StreetWorksTypeEnum": {
+      "type": "string",
+      "enum": [
+        "buildingWork",
+        "trenchingWork",
+        "utilityWork",
+        "extendedG"
+      ]
+    },
+    "StreetWorksTypeEnumG": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "value": {
+          "$ref": "DATEXII_3_UrbanExtensions.json#/definitions/StreetWorksTypeEnum"
+        },
+        "extendedValueG": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    }
+  }
+}

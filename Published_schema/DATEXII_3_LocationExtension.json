@@ -1,0 +1,113 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "definitions": {
+    "Address": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "postcode": {
+          "$ref": "DATEXII_3_Common.json#/definitions/String"
+        },
+        "city": {
+          "$ref": "DATEXII_3_Common.json#/definitions/MultilingualString"
+        },
+        "countryCode": {
+          "$ref": "DATEXII_3_Common.json#/definitions/CountryCode"
+        },
+        "addressLine": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_LocationExtension.json#/definitions/AddressLine"
+          },
+          "minItems": 0
+        },
+        "addressExtensionG": {
+          "$ref": "DATEXII_3_Common.json#/definitions/ExtensionTypeG"
+        }
+      }
+    },
+    "AddressLine": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "order": {
+          "$ref": "DATEXII_3_Common.json#/definitions/NonNegativeInteger"
+        },
+        "type": {
+          "$ref": "DATEXII_3_LocationExtension.json#/definitions/AddressLineTypeEnumG"
+        },
+        "text": {
+          "$ref": "DATEXII_3_Common.json#/definitions/MultilingualString"
+        },
+        "addressLineExtensionG": {
+          "$ref": "DATEXII_3_Common.json#/definitions/ExtensionTypeG"
+        }
+      },
+      "required": [
+        "order",
+        "text",
+        "type"
+      ]
+    },
+    "AddressLineTypeEnum": {
+      "type": "string",
+      "enum": [
+        "apartment",
+        "building",
+        "poBox",
+        "unit",
+        "region",
+        "town",
+        "districtTerritory",
+        "floor",
+        "street",
+        "houseNumber",
+        "generalTextLine",
+        "extendedG"
+      ]
+    },
+    "AddressLineTypeEnumG": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "value": {
+          "$ref": "DATEXII_3_LocationExtension.json#/definitions/AddressLineTypeEnum"
+        },
+        "extendedValueG": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "FacilityLocation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "timeZone": {
+          "$ref": "DATEXII_3_Facilities.json#/definitions/TimeZone"
+        },
+        "address": {
+          "$ref": "DATEXII_3_LocationExtension.json#/definitions/Address"
+        }
+      }
+    },
+    "NamedAreaCode": {
+      "$ref": "DATEXII_3_Common.json#/definitions/String",
+      "maxLength": 8
+    },
+    "NamedAreaExtended": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "namedAreaCode": {
+          "$ref": "DATEXII_3_LocationExtension.json#/definitions/NamedAreaCode"
+        }
+      },
+      "required": [
+        "namedAreaCode"
+      ]
+    }
+  }
+}

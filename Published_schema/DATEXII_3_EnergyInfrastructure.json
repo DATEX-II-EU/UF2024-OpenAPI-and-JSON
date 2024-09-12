@@ -1,0 +1,2542 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "definitions": {
+    "Ampere": {
+      "$ref": "DATEXII_3_Common.json#/definitions/Float"
+    },
+    "AssociatedParking": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "$ref": "DATEXII_3_Facilities.json#/definitions/FacilityTypeEnumG"
+        },
+        "facilityReference": {
+          "$ref": "DATEXII_3_Facilities.json#/definitions/FacilityObjectVersionedReferenceG"
+        },
+        "description": {
+          "$ref": "DATEXII_3_Common.json#/definitions/MultilingualString"
+        },
+        "carParkingCapacity": {
+          "$ref": "DATEXII_3_Common.json#/definitions/NonNegativeInteger"
+        },
+        "truckParkingCapacity": {
+          "$ref": "DATEXII_3_Common.json#/definitions/NonNegativeInteger"
+        },
+        "bikeParkingCapacity": {
+          "$ref": "DATEXII_3_Common.json#/definitions/NonNegativeInteger"
+        },
+        "associatedFacilityExtensionG": {
+          "$ref": "DATEXII_3_Common.json#/definitions/ExtensionTypeG"
+        },
+        "associatedParkingExtensionG": {
+          "$ref": "DATEXII_3_Common.json#/definitions/ExtensionTypeG"
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "AuthenticationAndIdentificationEnum": {
+      "type": "string",
+      "enum": [
+        "activeRFIDChip",
+        "apps",
+        "calypso",
+        "cashPayment",
+        "creditCard",
+        "debitCard",
+        "mifareClassic",
+        "mifareDesfire",
+        "nfc",
+        "overTheAir",
+        "phoneDialog",
+        "phoneSMS",
+        "pinpad",
+        "plc",
+        "prepaidCard",
+        "rfid",
+        "website",
+        "unlimitedAccess",
+        "noAccess",
+        "extendedG"
+      ]
+    },
+    "AuthenticationAndIdentificationEnumG": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "value": {
+          "$ref": "DATEXII_3_EnergyInfrastructure.json#/definitions/AuthenticationAndIdentificationEnum"
+        },
+        "extendedValueG": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "BioethanolTypeEnum": {
+      "type": "string",
+      "enum": [
+        "superE5",
+        "superE10",
+        "unknown",
+        "other",
+        "extendedG"
+      ]
+    },
+    "BioethanolTypeEnumG": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "value": {
+          "$ref": "DATEXII_3_EnergyInfrastructure.json#/definitions/BioethanolTypeEnum"
+        },
+        "extendedValueG": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ChargingModeEnum": {
+      "type": "string",
+      "enum": [
+        "mode1AC1p",
+        "mode1AC3p",
+        "mode2AC1p",
+        "mode2AC3p",
+        "mode3AC3p",
+        "mode4DC",
+        "legacyInductive",
+        "ccs",
+        "other",
+        "unknown",
+        "extendedG"
+      ]
+    },
+    "ChargingModeEnumG": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "value": {
+          "$ref": "DATEXII_3_EnergyInfrastructure.json#/definitions/ChargingModeEnum"
+        },
+        "extendedValueG": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ChargingPointUsageTypeEnum": {
+      "type": "string",
+      "enum": [
+        "electricBoat",
+        "electricBike",
+        "electricalDevices",
+        "electricMotorcycle",
+        "electricVehicle",
+        "lorryPowerConsumption",
+        "motorhomeOrCaravanSupply",
+        "overheadLineDrivenVehicles",
+        "other",
+        "extendedG"
+      ]
+    },
+    "ChargingPointUsageTypeEnumG": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "value": {
+          "$ref": "DATEXII_3_EnergyInfrastructure.json#/definitions/ChargingPointUsageTypeEnum"
+        },
+        "extendedValueG": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "Connector": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "connectorType": {
+          "$ref": "DATEXII_3_EnergyInfrastructure.json#/definitions/ConnectorTypeEnumG"
+        },
+        "otherConnector": {
+          "$ref": "DATEXII_3_Common.json#/definitions/String"
+        },
+        "countryOfDomesticSocket": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_Common.json#/definitions/CountryCode"
+          },
+          "minItems": 0
+        },
+        "chargingMode": {
+          "$ref": "DATEXII_3_EnergyInfrastructure.json#/definitions/ChargingModeEnumG"
+        },
+        "connectorFormat": {
+          "$ref": "DATEXII_3_EnergyInfrastructure.json#/definitions/ConnectorFormatTypeEnumG"
+        },
+        "maxPowerAtSocket": {
+          "$ref": "DATEXII_3_EnergyInfrastructure.json#/definitions/Watt"
+        },
+        "voltage": {
+          "$ref": "DATEXII_3_EnergyInfrastructure.json#/definitions/Volt"
+        },
+        "maximumCurrent": {
+          "$ref": "DATEXII_3_EnergyInfrastructure.json#/definitions/Ampere"
+        },
+        "connectorExtensionG": {
+          "$ref": "DATEXII_3_Common.json#/definitions/ExtensionTypeG"
+        }
+      },
+      "required": [
+        "connectorType",
+        "maxPowerAtSocket"
+      ]
+    },
+    "ConnectorFormatTypeEnum": {
+      "type": "string",
+      "enum": [
+        "cableMode2",
+        "cableMode3",
+        "otherCable",
+        "socket",
+        "extendedG"
+      ]
+    },
+    "ConnectorFormatTypeEnumG": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "value": {
+          "$ref": "DATEXII_3_EnergyInfrastructure.json#/definitions/ConnectorFormatTypeEnum"
+        },
+        "extendedValueG": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ConnectorTypeEnum": {
+      "type": "string",
+      "enum": [
+        "cee3",
+        "cee5",
+        "chademo",
+        "yazaki",
+        "domestic",
+        "domesticA",
+        "domesticB",
+        "domesticC",
+        "domesticD",
+        "domesticE",
+        "domesticF",
+        "domesticG",
+        "domesticH",
+        "domesticI",
+        "domesticJ",
+        "domesticK",
+        "domesticL",
+        "domesticM",
+        "domesticN",
+        "domesticO",
+        "iec60309x2three16",
+        "iec60309x2three32",
+        "iec60309x2three64",
+        "iec60309x2single16",
+        "iec62196T1",
+        "iec62196T1COMBO",
+        "iec62196T2",
+        "iec62196T2COMBO",
+        "iec62196T3A",
+        "iec62196T3C",
+        "pantographBottomUp",
+        "pantographTopDown",
+        "teslaConnectorEurope",
+        "teslaConnectorAmerica",
+        "teslaR",
+        "teslaS",
+        "other",
+        "extendedG"
+      ]
+    },
+    "ConnectorTypeEnumG": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "value": {
+          "$ref": "DATEXII_3_EnergyInfrastructure.json#/definitions/ConnectorTypeEnum"
+        },
+        "extendedValueG": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "DeliveryUnitEnum": {
+      "type": "string",
+      "enum": [
+        "litre",
+        "kWh",
+        "kg",
+        "m3",
+        "imperialGallon",
+        "usGallon",
+        "gasGallonEquivalent",
+        "extendedG"
+      ]
+    },
+    "DeliveryUnitEnumG": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "value": {
+          "$ref": "DATEXII_3_EnergyInfrastructure.json#/definitions/DeliveryUnitEnum"
+        },
+        "extendedValueG": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "DieselRefillPoint": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "idG": {
+          "type": "string"
+        },
+        "versionG": {
+          "type": "string"
+        },
+        "name": {
+          "$ref": "DATEXII_3_Common.json#/definitions/MultilingualString"
+        },
+        "alias": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_Common.json#/definitions/MultilingualString"
+          },
+          "minItems": 0
+        },
+        "externalIdentifier": {
+          "$ref": "DATEXII_3_Common.json#/definitions/String"
+        },
+        "lastUpdated": {
+          "$ref": "DATEXII_3_Common.json#/definitions/DateTime"
+        },
+        "description": {
+          "$ref": "DATEXII_3_Common.json#/definitions/MultilingualString"
+        },
+        "accessibility": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_Facilities.json#/definitions/AccessibilityEnumG"
+          },
+          "minItems": 0
+        },
+        "additionalInformation": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_Common.json#/definitions/MultilingualString"
+          },
+          "minItems": 0
+        },
+        "deliveryUnit": {
+          "$ref": "DATEXII_3_EnergyInfrastructure.json#/definitions/DeliveryUnitEnumG"
+        },
+        "maximumDeliveryAmount": {
+          "$ref": "DATEXII_3_EnergyInfrastructure.json#/definitions/Units"
+        },
+        "minimumDeliveryAmount": {
+          "$ref": "DATEXII_3_EnergyInfrastructure.json#/definitions/Units"
+        },
+        "modelType": {
+          "$ref": "DATEXII_3_Common.json#/definitions/MultilingualString"
+        },
+        "reservation": {
+          "$ref": "DATEXII_3_Facilities.json#/definitions/ReservationTypeEnumG"
+        },
+        "dieselType": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_EnergyInfrastructure.json#/definitions/DieselTypeEnumG"
+          },
+          "minItems": 0
+        },
+        "cetane": {
+          "$ref": "DATEXII_3_Common.json#/definitions/NonNegativeInteger"
+        },
+        "informationWebsite": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_Common.json#/definitions/UrlLink"
+          },
+          "minItems": 0
+        },
+        "photoUrl": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_Common.json#/definitions/UrlLink"
+          },
+          "minItems": 0
+        },
+        "photo": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_Facilities.json#/definitions/Image"
+          },
+          "minItems": 0
+        },
+        "operatingHours": {
+          "$ref": "DATEXII_3_Facilities.json#/definitions/OperatingHoursG"
+        },
+        "locationReference": {
+          "$ref": "DATEXII_3_LocationReferencing.json#/definitions/LocationReferenceG"
+        },
+        "owner": {
+          "$ref": "DATEXII_3_Facilities.json#/definitions/OrganisationG"
+        },
+        "operator": {
+          "$ref": "DATEXII_3_Facilities.json#/definitions/OrganisationG"
+        },
+        "associatedFacility": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_Facilities.json#/definitions/AssociatedFacilityG"
+          },
+          "minItems": 0
+        },
+        "rates": {
+          "$ref": "DATEXII_3_Facilities.json#/definitions/RatesG"
+        },
+        "applicableForVehicles": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_Common.json#/definitions/VehicleCharacteristics"
+          },
+          "minItems": 0
+        },
+        "dimension": {
+          "$ref": "DATEXII_3_Facilities.json#/definitions/Dimension"
+        },
+        "supplementalFacility": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_Facilities.json#/definitions/SupplementalFacilityG"
+          },
+          "minItems": 0
+        },
+        "serviceType": {
+          "$ref": "DATEXII_3_EnergyInfrastructure.json#/definitions/ServiceType"
+        },
+        "facilityObjectExtensionG": {
+          "$ref": "DATEXII_3_Common.json#/definitions/ExtensionTypeG"
+        },
+        "facilityExtensionG": {
+          "$ref": "DATEXII_3_Common.json#/definitions/ExtensionTypeG"
+        },
+        "refillPointExtensionG": {
+          "$ref": "DATEXII_3_Common.json#/definitions/ExtensionTypeG"
+        },
+        "dieselRefillPointExtensionG": {
+          "$ref": "DATEXII_3_Common.json#/definitions/ExtensionTypeG"
+        }
+      },
+      "required": [
+        "idG",
+        "versionG"
+      ]
+    },
+    "DieselTypeEnum": {
+      "type": "string",
+      "enum": [
+        "carDiesel",
+        "truckDiesel",
+        "bioDiesel",
+        "unknown",
+        "extendedG"
+      ]
+    },
+    "DieselTypeEnumG": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "value": {
+          "$ref": "DATEXII_3_EnergyInfrastructure.json#/definitions/DieselTypeEnum"
+        },
+        "extendedValueG": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ElectricChargingEquipment": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "idG": {
+          "type": "string"
+        },
+        "versionG": {
+          "type": "string"
+        },
+        "name": {
+          "$ref": "DATEXII_3_Common.json#/definitions/MultilingualString"
+        },
+        "alias": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_Common.json#/definitions/MultilingualString"
+          },
+          "minItems": 0
+        },
+        "externalIdentifier": {
+          "$ref": "DATEXII_3_Common.json#/definitions/String"
+        },
+        "lastUpdated": {
+          "$ref": "DATEXII_3_Common.json#/definitions/DateTime"
+        },
+        "description": {
+          "$ref": "DATEXII_3_Common.json#/definitions/MultilingualString"
+        },
+        "accessibility": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_Facilities.json#/definitions/AccessibilityEnumG"
+          },
+          "minItems": 0
+        },
+        "additionalInformation": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_Common.json#/definitions/MultilingualString"
+          },
+          "minItems": 0
+        },
+        "availability": {
+          "$ref": "DATEXII_3_Facilities.json#/definitions/AvailabilityEnumG"
+        },
+        "quantity": {
+          "$ref": "DATEXII_3_Common.json#/definitions/NonNegativeInteger"
+        },
+        "regularlyCleaned": {
+          "$ref": "DATEXII_3_Common.json#/definitions/Boolean"
+        },
+        "applicableForUser": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_Facilities.json#/definitions/UserTypeEnumG"
+          },
+          "minItems": 0
+        },
+        "informationWebsite": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_Common.json#/definitions/UrlLink"
+          },
+          "minItems": 0
+        },
+        "photoUrl": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_Common.json#/definitions/UrlLink"
+          },
+          "minItems": 0
+        },
+        "photo": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_Facilities.json#/definitions/Image"
+          },
+          "minItems": 0
+        },
+        "operatingHours": {
+          "$ref": "DATEXII_3_Facilities.json#/definitions/OperatingHoursG"
+        },
+        "locationReference": {
+          "$ref": "DATEXII_3_LocationReferencing.json#/definitions/LocationReferenceG"
+        },
+        "owner": {
+          "$ref": "DATEXII_3_Facilities.json#/definitions/OrganisationG"
+        },
+        "operator": {
+          "$ref": "DATEXII_3_Facilities.json#/definitions/OrganisationG"
+        },
+        "associatedFacility": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_Facilities.json#/definitions/AssociatedFacilityG"
+          },
+          "minItems": 0
+        },
+        "rates": {
+          "$ref": "DATEXII_3_Facilities.json#/definitions/RatesG"
+        },
+        "applicableForVehicles": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_Common.json#/definitions/VehicleCharacteristics"
+          },
+          "minItems": 0
+        },
+        "dimension": {
+          "$ref": "DATEXII_3_Facilities.json#/definitions/Dimension"
+        },
+        "electricChargingPoint": {
+          "$ref": "DATEXII_3_EnergyInfrastructure.json#/definitions/ElectricChargingPoint"
+        },
+        "facilityObjectExtensionG": {
+          "$ref": "DATEXII_3_Common.json#/definitions/ExtensionTypeG"
+        },
+        "supplementalFacilityExtensionG": {
+          "$ref": "DATEXII_3_Common.json#/definitions/ExtensionTypeG"
+        },
+        "electricChargingEquipmentExtensionG": {
+          "$ref": "DATEXII_3_Common.json#/definitions/ExtensionTypeG"
+        }
+      },
+      "required": [
+        "idG",
+        "versionG",
+        "electricChargingPoint"
+      ]
+    },
+    "ElectricChargingPoint": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "idG": {
+          "type": "string"
+        },
+        "versionG": {
+          "type": "string"
+        },
+        "name": {
+          "$ref": "DATEXII_3_Common.json#/definitions/MultilingualString"
+        },
+        "alias": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_Common.json#/definitions/MultilingualString"
+          },
+          "minItems": 0
+        },
+        "externalIdentifier": {
+          "$ref": "DATEXII_3_Common.json#/definitions/String"
+        },
+        "lastUpdated": {
+          "$ref": "DATEXII_3_Common.json#/definitions/DateTime"
+        },
+        "description": {
+          "$ref": "DATEXII_3_Common.json#/definitions/MultilingualString"
+        },
+        "accessibility": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_Facilities.json#/definitions/AccessibilityEnumG"
+          },
+          "minItems": 0
+        },
+        "additionalInformation": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_Common.json#/definitions/MultilingualString"
+          },
+          "minItems": 0
+        },
+        "deliveryUnit": {
+          "$ref": "DATEXII_3_EnergyInfrastructure.json#/definitions/DeliveryUnitEnumG"
+        },
+        "maximumDeliveryAmount": {
+          "$ref": "DATEXII_3_EnergyInfrastructure.json#/definitions/Units"
+        },
+        "minimumDeliveryAmount": {
+          "$ref": "DATEXII_3_EnergyInfrastructure.json#/definitions/Units"
+        },
+        "modelType": {
+          "$ref": "DATEXII_3_Common.json#/definitions/MultilingualString"
+        },
+        "reservation": {
+          "$ref": "DATEXII_3_Facilities.json#/definitions/ReservationTypeEnumG"
+        },
+        "usageType": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_EnergyInfrastructure.json#/definitions/ChargingPointUsageTypeEnumG"
+          },
+          "minItems": 0
+        },
+        "vehicleToGridCommunicationType": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_EnergyInfrastructure.json#/definitions/VehicleToGridCommunicationTypeEnumG"
+          },
+          "minItems": 0
+        },
+        "availableVoltage": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_EnergyInfrastructure.json#/definitions/Volt"
+          },
+          "minItems": 0
+        },
+        "availableChargingPower": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_EnergyInfrastructure.json#/definitions/Watt"
+          },
+          "minItems": 0
+        },
+        "informationWebsite": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_Common.json#/definitions/UrlLink"
+          },
+          "minItems": 0
+        },
+        "photoUrl": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_Common.json#/definitions/UrlLink"
+          },
+          "minItems": 0
+        },
+        "photo": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_Facilities.json#/definitions/Image"
+          },
+          "minItems": 0
+        },
+        "operatingHours": {
+          "$ref": "DATEXII_3_Facilities.json#/definitions/OperatingHoursG"
+        },
+        "locationReference": {
+          "$ref": "DATEXII_3_LocationReferencing.json#/definitions/LocationReferenceG"
+        },
+        "owner": {
+          "$ref": "DATEXII_3_Facilities.json#/definitions/OrganisationG"
+        },
+        "operator": {
+          "$ref": "DATEXII_3_Facilities.json#/definitions/OrganisationG"
+        },
+        "associatedFacility": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_Facilities.json#/definitions/AssociatedFacilityG"
+          },
+          "minItems": 0
+        },
+        "rates": {
+          "$ref": "DATEXII_3_Facilities.json#/definitions/RatesG"
+        },
+        "applicableForVehicles": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_Common.json#/definitions/VehicleCharacteristics"
+          },
+          "minItems": 0
+        },
+        "dimension": {
+          "$ref": "DATEXII_3_Facilities.json#/definitions/Dimension"
+        },
+        "supplementalFacility": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_Facilities.json#/definitions/SupplementalFacilityG"
+          },
+          "minItems": 0
+        },
+        "serviceType": {
+          "$ref": "DATEXII_3_EnergyInfrastructure.json#/definitions/ServiceType"
+        },
+        "connector": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_EnergyInfrastructure.json#/definitions/Connector"
+          },
+          "minItems": 0
+        },
+        "electricEnergyMix": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_EnergyInfrastructure.json#/definitions/ElectricEnergyMix"
+          },
+          "minItems": 0
+        },
+        "vehicleSpace": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_EnergyInfrastructure.json#/definitions/VehicleSpace"
+          },
+          "minItems": 0
+        },
+        "facilityObjectExtensionG": {
+          "$ref": "DATEXII_3_Common.json#/definitions/ExtensionTypeG"
+        },
+        "facilityExtensionG": {
+          "$ref": "DATEXII_3_Common.json#/definitions/ExtensionTypeG"
+        },
+        "refillPointExtensionG": {
+          "$ref": "DATEXII_3_Common.json#/definitions/ExtensionTypeG"
+        },
+        "electricChargingPointExtensionG": {
+          "$ref": "DATEXII_3_Common.json#/definitions/ExtensionTypeG"
+        }
+      },
+      "required": [
+        "idG",
+        "versionG"
+      ]
+    },
+    "ElectricChargingPointStatus": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "reference": {
+          "$ref": "DATEXII_3_Facilities.json#/definitions/FacilityObjectVersionedReferenceG"
+        },
+        "lastUpdated": {
+          "$ref": "DATEXII_3_Common.json#/definitions/DateTime"
+        },
+        "openingStatus": {
+          "$ref": "DATEXII_3_Facilities.json#/definitions/OpeningStatusEnumG"
+        },
+        "regularOperatingHoursInForce": {
+          "$ref": "DATEXII_3_Common.json#/definitions/Boolean"
+        },
+        "statusDescription": {
+          "$ref": "DATEXII_3_Common.json#/definitions/MultilingualString"
+        },
+        "status": {
+          "$ref": "DATEXII_3_EnergyInfrastructure.json#/definitions/RefillPointStatusEnumG"
+        },
+        "unitsInStock": {
+          "$ref": "DATEXII_3_EnergyInfrastructure.json#/definitions/Units"
+        },
+        "remainingChargingTime": {
+          "$ref": "DATEXII_3_Common.json#/definitions/Seconds"
+        },
+        "currentVoltage": {
+          "$ref": "DATEXII_3_EnergyInfrastructure.json#/definitions/Volt"
+        },
+        "currentChargingPower": {
+          "$ref": "DATEXII_3_EnergyInfrastructure.json#/definitions/Watt"
+        },
+        "nextAvailableChargingSlots": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_Common.json#/definitions/DateTime"
+          },
+          "minItems": 0
+        },
+        "newOperatingHours": {
+          "$ref": "DATEXII_3_Facilities.json#/definitions/OperatingHoursG"
+        },
+        "newRates": {
+          "$ref": "DATEXII_3_Facilities.json#/definitions/RatesG"
+        },
+        "fault": {
+          "$ref": "DATEXII_3_Common.json#/definitions/FaultG"
+        },
+        "supplementalFacilityStatus": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_Facilities.json#/definitions/SupplementalFacilityStatus"
+          },
+          "minItems": 0
+        },
+        "waitingTime": {
+          "$ref": "DATEXII_3_Facilities.json#/definitions/DurationValue"
+        },
+        "electricEnergyMixOverride": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_EnergyInfrastructure.json#/definitions/ElectricEnergyMix"
+          },
+          "minItems": 0
+        },
+        "facilityObjectStatusExtensionG": {
+          "$ref": "DATEXII_3_Common.json#/definitions/ExtensionTypeG"
+        },
+        "facilityStatusExtensionG": {
+          "$ref": "DATEXII_3_Common.json#/definitions/ExtensionTypeG"
+        },
+        "refillPointStatusExtensionG": {
+          "$ref": "DATEXII_3_Common.json#/definitions/ExtensionTypeG"
+        },
+        "electricChargingPointStatusExtensionG": {
+          "$ref": "DATEXII_3_Common.json#/definitions/ExtensionTypeG"
+        }
+      },
+      "required": [
+        "reference",
+        "status"
+      ]
+    },
+    "ElectricEnergyMix": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "energyMixIndex": {
+          "$ref": "DATEXII_3_Common.json#/definitions/Integer"
+        },
+        "energyProductName": {
+          "$ref": "DATEXII_3_Common.json#/definitions/MultilingualString"
+        },
+        "isGreenEnergy": {
+          "$ref": "DATEXII_3_Common.json#/definitions/Boolean"
+        },
+        "carbonDioxideImpact": {
+          "$ref": "DATEXII_3_Common.json#/definitions/Float"
+        },
+        "nuclearWasteImpact": {
+          "$ref": "DATEXII_3_Common.json#/definitions/Float"
+        },
+        "notAvailable": {
+          "$ref": "DATEXII_3_Common.json#/definitions/Boolean"
+        },
+        "electricEnergySourceRatio": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_EnergyInfrastructure.json#/definitions/ElectricEnergySourceRatio"
+          },
+          "minItems": 0
+        },
+        "energyProvider": {
+          "$ref": "DATEXII_3_Facilities.json#/definitions/OrganisationG"
+        },
+        "rates": {
+          "$ref": "DATEXII_3_Facilities.json#/definitions/RatesG"
+        },
+        "electricEnergyMixExtensionG": {
+          "$ref": "DATEXII_3_Common.json#/definitions/ExtensionTypeG"
+        }
+      },
+      "required": [
+        "energyMixIndex"
+      ]
+    },
+    "ElectricEnergySourceRatio": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "energySource": {
+          "$ref": "DATEXII_3_EnergyInfrastructure.json#/definitions/ElectricEnergySourceTypeEnumG"
+        },
+        "otherEnergySource": {
+          "$ref": "DATEXII_3_Common.json#/definitions/String"
+        },
+        "sourceRatioValue": {
+          "$ref": "DATEXII_3_Common.json#/definitions/PercentageValue"
+        },
+        "electricEnergySourceRatioExtensionG": {
+          "$ref": "DATEXII_3_Common.json#/definitions/ExtensionTypeG"
+        }
+      },
+      "required": [
+        "energySource",
+        "sourceRatioValue"
+      ]
+    },
+    "ElectricEnergySourceTypeEnum": {
+      "type": "string",
+      "enum": [
+        "biogas",
+        "coal",
+        "gas",
+        "nuclear",
+        "solar",
+        "water",
+        "wind",
+        "generalGreen",
+        "generalFossil",
+        "other",
+        "extendedG"
+      ]
+    },
+    "ElectricEnergySourceTypeEnumG": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "value": {
+          "$ref": "DATEXII_3_EnergyInfrastructure.json#/definitions/ElectricEnergySourceTypeEnum"
+        },
+        "extendedValueG": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "EnergyInfrastructureSite": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "idG": {
+          "type": "string"
+        },
+        "versionG": {
+          "type": "string"
+        },
+        "name": {
+          "$ref": "DATEXII_3_Common.json#/definitions/MultilingualString"
+        },
+        "alias": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_Common.json#/definitions/MultilingualString"
+          },
+          "minItems": 0
+        },
+        "externalIdentifier": {
+          "$ref": "DATEXII_3_Common.json#/definitions/String"
+        },
+        "lastUpdated": {
+          "$ref": "DATEXII_3_Common.json#/definitions/DateTime"
+        },
+        "description": {
+          "$ref": "DATEXII_3_Common.json#/definitions/MultilingualString"
+        },
+        "accessibility": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_Facilities.json#/definitions/AccessibilityEnumG"
+          },
+          "minItems": 0
+        },
+        "additionalInformation": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_Common.json#/definitions/MultilingualString"
+          },
+          "minItems": 0
+        },
+        "typeOfSite": {
+          "$ref": "DATEXII_3_EnergyInfrastructure.json#/definitions/EnergyInfrastructureSiteTypeEnumG"
+        },
+        "brand": {
+          "$ref": "DATEXII_3_Common.json#/definitions/MultilingualString"
+        },
+        "exclusiveUsers": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_Facilities.json#/definitions/UserTypeEnumG"
+          },
+          "minItems": 0
+        },
+        "preferredUsers": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_Facilities.json#/definitions/UserTypeEnumG"
+          },
+          "minItems": 0
+        },
+        "informationWebsite": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_Common.json#/definitions/UrlLink"
+          },
+          "minItems": 0
+        },
+        "photoUrl": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_Common.json#/definitions/UrlLink"
+          },
+          "minItems": 0
+        },
+        "photo": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_Facilities.json#/definitions/Image"
+          },
+          "minItems": 0
+        },
+        "operatingHours": {
+          "$ref": "DATEXII_3_Facilities.json#/definitions/OperatingHoursG"
+        },
+        "locationReference": {
+          "$ref": "DATEXII_3_LocationReferencing.json#/definitions/LocationReferenceG"
+        },
+        "owner": {
+          "$ref": "DATEXII_3_Facilities.json#/definitions/OrganisationG"
+        },
+        "operator": {
+          "$ref": "DATEXII_3_Facilities.json#/definitions/OrganisationG"
+        },
+        "associatedFacility": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_Facilities.json#/definitions/AssociatedFacilityG"
+          },
+          "minItems": 0
+        },
+        "rates": {
+          "$ref": "DATEXII_3_Facilities.json#/definitions/RatesG"
+        },
+        "applicableForVehicles": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_Common.json#/definitions/VehicleCharacteristics"
+          },
+          "minItems": 0
+        },
+        "dimension": {
+          "$ref": "DATEXII_3_Facilities.json#/definitions/Dimension"
+        },
+        "supplementalFacility": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_Facilities.json#/definitions/SupplementalFacilityG"
+          },
+          "minItems": 0
+        },
+        "entrance": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_LocationReferencing.json#/definitions/LocationG"
+          },
+          "minItems": 0
+        },
+        "exit": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_LocationReferencing.json#/definitions/LocationG"
+          },
+          "minItems": 0
+        },
+        "energyInfrastructureStation": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_EnergyInfrastructure.json#/definitions/EnergyInfrastructureStation"
+          },
+          "minItems": 0
+        },
+        "facilityObjectExtensionG": {
+          "$ref": "DATEXII_3_Common.json#/definitions/ExtensionTypeG"
+        },
+        "facilityExtensionG": {
+          "$ref": "DATEXII_3_Common.json#/definitions/ExtensionTypeG"
+        },
+        "energyInfrastructureSiteExtensionG": {
+          "$ref": "DATEXII_3_Common.json#/definitions/ExtensionTypeG"
+        }
+      },
+      "required": [
+        "idG",
+        "versionG"
+      ]
+    },
+    "EnergyInfrastructureSiteStatus": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "reference": {
+          "$ref": "DATEXII_3_Facilities.json#/definitions/FacilityObjectVersionedReferenceG"
+        },
+        "lastUpdated": {
+          "$ref": "DATEXII_3_Common.json#/definitions/DateTime"
+        },
+        "openingStatus": {
+          "$ref": "DATEXII_3_Facilities.json#/definitions/OpeningStatusEnumG"
+        },
+        "regularOperatingHoursInForce": {
+          "$ref": "DATEXII_3_Common.json#/definitions/Boolean"
+        },
+        "statusDescription": {
+          "$ref": "DATEXII_3_Common.json#/definitions/MultilingualString"
+        },
+        "availableCarParkingPlaces": {
+          "$ref": "DATEXII_3_Common.json#/definitions/NonNegativeInteger"
+        },
+        "availableTruckParkingPlaces": {
+          "$ref": "DATEXII_3_Common.json#/definitions/NonNegativeInteger"
+        },
+        "newOperatingHours": {
+          "$ref": "DATEXII_3_Facilities.json#/definitions/OperatingHoursG"
+        },
+        "newRates": {
+          "$ref": "DATEXII_3_Facilities.json#/definitions/RatesG"
+        },
+        "fault": {
+          "$ref": "DATEXII_3_Common.json#/definitions/FaultG"
+        },
+        "supplementalFacilityStatus": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_Facilities.json#/definitions/SupplementalFacilityStatus"
+          },
+          "minItems": 0
+        },
+        "energyInfrastructureStationStatus": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_EnergyInfrastructure.json#/definitions/EnergyInfrastructureStationStatus"
+          },
+          "minItems": 0
+        },
+        "facilityObjectStatusExtensionG": {
+          "$ref": "DATEXII_3_Common.json#/definitions/ExtensionTypeG"
+        },
+        "facilityStatusExtensionG": {
+          "$ref": "DATEXII_3_Common.json#/definitions/ExtensionTypeG"
+        },
+        "energyInfrastructureSiteStatusExtensionG": {
+          "$ref": "DATEXII_3_Common.json#/definitions/ExtensionTypeG"
+        }
+      },
+      "required": [
+        "reference"
+      ]
+    },
+    "EnergyInfrastructureSiteTypeEnum": {
+      "type": "string",
+      "enum": [
+        "roofedStation",
+        "inBuilding",
+        "openSpace",
+        "onstreet",
+        "onCompanySite",
+        "other",
+        "extendedG"
+      ]
+    },
+    "EnergyInfrastructureSiteTypeEnumG": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "value": {
+          "$ref": "DATEXII_3_EnergyInfrastructure.json#/definitions/EnergyInfrastructureSiteTypeEnum"
+        },
+        "extendedValueG": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "EnergyInfrastructureStation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "idG": {
+          "type": "string"
+        },
+        "versionG": {
+          "type": "string"
+        },
+        "name": {
+          "$ref": "DATEXII_3_Common.json#/definitions/MultilingualString"
+        },
+        "alias": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_Common.json#/definitions/MultilingualString"
+          },
+          "minItems": 0
+        },
+        "externalIdentifier": {
+          "$ref": "DATEXII_3_Common.json#/definitions/String"
+        },
+        "lastUpdated": {
+          "$ref": "DATEXII_3_Common.json#/definitions/DateTime"
+        },
+        "description": {
+          "$ref": "DATEXII_3_Common.json#/definitions/MultilingualString"
+        },
+        "accessibility": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_Facilities.json#/definitions/AccessibilityEnumG"
+          },
+          "minItems": 0
+        },
+        "additionalInformation": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_Common.json#/definitions/MultilingualString"
+          },
+          "minItems": 0
+        },
+        "authenticationAndIdentificationMethods": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_EnergyInfrastructure.json#/definitions/AuthenticationAndIdentificationEnumG"
+          },
+          "minItems": 0
+        },
+        "numberOfRefillPoints": {
+          "$ref": "DATEXII_3_Common.json#/definitions/NonNegativeInteger"
+        },
+        "refillPointByReference": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_Common.json#/definitions/VersionedReference"
+          },
+          "minItems": 0
+        },
+        "userInterfaceLanguage": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_Common.json#/definitions/Language"
+          },
+          "minItems": 0
+        },
+        "informationWebsite": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_Common.json#/definitions/UrlLink"
+          },
+          "minItems": 0
+        },
+        "photoUrl": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_Common.json#/definitions/UrlLink"
+          },
+          "minItems": 0
+        },
+        "photo": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_Facilities.json#/definitions/Image"
+          },
+          "minItems": 0
+        },
+        "operatingHours": {
+          "$ref": "DATEXII_3_Facilities.json#/definitions/OperatingHoursG"
+        },
+        "locationReference": {
+          "$ref": "DATEXII_3_LocationReferencing.json#/definitions/LocationReferenceG"
+        },
+        "owner": {
+          "$ref": "DATEXII_3_Facilities.json#/definitions/OrganisationG"
+        },
+        "operator": {
+          "$ref": "DATEXII_3_Facilities.json#/definitions/OrganisationG"
+        },
+        "associatedFacility": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_Facilities.json#/definitions/AssociatedFacilityG"
+          },
+          "minItems": 0
+        },
+        "rates": {
+          "$ref": "DATEXII_3_Facilities.json#/definitions/RatesG"
+        },
+        "applicableForVehicles": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_Common.json#/definitions/VehicleCharacteristics"
+          },
+          "minItems": 0
+        },
+        "dimension": {
+          "$ref": "DATEXII_3_Facilities.json#/definitions/Dimension"
+        },
+        "supplementalFacility": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_Facilities.json#/definitions/SupplementalFacilityG"
+          },
+          "minItems": 0
+        },
+        "energyProvider": {
+          "$ref": "DATEXII_3_Facilities.json#/definitions/OrganisationG"
+        },
+        "energyDistributor": {
+          "$ref": "DATEXII_3_Facilities.json#/definitions/OrganisationG"
+        },
+        "serviceType": {
+          "$ref": "DATEXII_3_EnergyInfrastructure.json#/definitions/ServiceType"
+        },
+        "refillPoint": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_EnergyInfrastructure.json#/definitions/RefillPointG"
+          },
+          "minItems": 0
+        },
+        "facilityObjectExtensionG": {
+          "$ref": "DATEXII_3_Common.json#/definitions/ExtensionTypeG"
+        },
+        "facilityExtensionG": {
+          "$ref": "DATEXII_3_Common.json#/definitions/ExtensionTypeG"
+        },
+        "energyInfrastructureStationExtensionG": {
+          "$ref": "DATEXII_3_Common.json#/definitions/ExtensionTypeG"
+        }
+      },
+      "required": [
+        "idG",
+        "versionG"
+      ]
+    },
+    "EnergyInfrastructureStationStatus": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "reference": {
+          "$ref": "DATEXII_3_Facilities.json#/definitions/FacilityObjectVersionedReferenceG"
+        },
+        "lastUpdated": {
+          "$ref": "DATEXII_3_Common.json#/definitions/DateTime"
+        },
+        "openingStatus": {
+          "$ref": "DATEXII_3_Facilities.json#/definitions/OpeningStatusEnumG"
+        },
+        "regularOperatingHoursInForce": {
+          "$ref": "DATEXII_3_Common.json#/definitions/Boolean"
+        },
+        "statusDescription": {
+          "$ref": "DATEXII_3_Common.json#/definitions/MultilingualString"
+        },
+        "isAvailable": {
+          "$ref": "DATEXII_3_Common.json#/definitions/Boolean"
+        },
+        "newOperatingHours": {
+          "$ref": "DATEXII_3_Facilities.json#/definitions/OperatingHoursG"
+        },
+        "newRates": {
+          "$ref": "DATEXII_3_Facilities.json#/definitions/RatesG"
+        },
+        "fault": {
+          "$ref": "DATEXII_3_Common.json#/definitions/FaultG"
+        },
+        "supplementalFacilityStatus": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_Facilities.json#/definitions/SupplementalFacilityStatus"
+          },
+          "minItems": 0
+        },
+        "refillPointStatus": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_EnergyInfrastructure.json#/definitions/RefillPointStatusG"
+          },
+          "minItems": 0
+        },
+        "facilityObjectStatusExtensionG": {
+          "$ref": "DATEXII_3_Common.json#/definitions/ExtensionTypeG"
+        },
+        "facilityStatusExtensionG": {
+          "$ref": "DATEXII_3_Common.json#/definitions/ExtensionTypeG"
+        },
+        "energyInfrastructureStationStatusExtensionG": {
+          "$ref": "DATEXII_3_Common.json#/definitions/ExtensionTypeG"
+        }
+      },
+      "required": [
+        "reference"
+      ]
+    },
+    "EnergyInfrastructureStatusPublication": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "lang": {
+          "$ref": "DATEXII_3_Common.json#/definitions/Language"
+        },
+        "feedDescription": {
+          "$ref": "DATEXII_3_Common.json#/definitions/MultilingualString"
+        },
+        "feedType": {
+          "$ref": "DATEXII_3_Common.json#/definitions/String"
+        },
+        "publicationTime": {
+          "$ref": "DATEXII_3_Common.json#/definitions/DateTime"
+        },
+        "tableReference": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_EnergyInfrastructure.json#/definitions/EnergyInfrastructureTableVersionedReferenceG"
+          },
+          "minItems": 0
+        },
+        "publicationCreator": {
+          "$ref": "DATEXII_3_Common.json#/definitions/InternationalIdentifier"
+        },
+        "headerInformation": {
+          "$ref": "DATEXII_3_Common.json#/definitions/HeaderInformation"
+        },
+        "energyInfrastructureSiteStatus": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_EnergyInfrastructure.json#/definitions/EnergyInfrastructureSiteStatus"
+          },
+          "minItems": 0
+        },
+        "payloadPublicationExtensionG": {
+          "$ref": "DATEXII_3_Common.json#/definitions/ExtensionTypeG"
+        },
+        "energyInfrastructureStatusPublicationExtensionG": {
+          "$ref": "DATEXII_3_Common.json#/definitions/ExtensionTypeG"
+        }
+      },
+      "required": [
+        "lang",
+        "publicationTime",
+        "publicationCreator"
+      ]
+    },
+    "EnergyInfrastructureTable": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "idG": {
+          "type": "string"
+        },
+        "versionG": {
+          "type": "string"
+        },
+        "tableName": {
+          "$ref": "DATEXII_3_Common.json#/definitions/String"
+        },
+        "energyInfrastructureSite": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_EnergyInfrastructure.json#/definitions/EnergyInfrastructureSite"
+          },
+          "minItems": 1
+        },
+        "energyInfrastructureTableExtensionG": {
+          "$ref": "DATEXII_3_Common.json#/definitions/ExtensionTypeG"
+        }
+      },
+      "required": [
+        "idG",
+        "versionG",
+        "energyInfrastructureSite"
+      ]
+    },
+    "EnergyInfrastructureTablePublication": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "lang": {
+          "$ref": "DATEXII_3_Common.json#/definitions/Language"
+        },
+        "feedDescription": {
+          "$ref": "DATEXII_3_Common.json#/definitions/MultilingualString"
+        },
+        "feedType": {
+          "$ref": "DATEXII_3_Common.json#/definitions/String"
+        },
+        "publicationTime": {
+          "$ref": "DATEXII_3_Common.json#/definitions/DateTime"
+        },
+        "publicationCreator": {
+          "$ref": "DATEXII_3_Common.json#/definitions/InternationalIdentifier"
+        },
+        "headerInformation": {
+          "$ref": "DATEXII_3_Common.json#/definitions/HeaderInformation"
+        },
+        "energyInfrastructureTable": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_EnergyInfrastructure.json#/definitions/EnergyInfrastructureTable"
+          },
+          "minItems": 1
+        },
+        "payloadPublicationExtensionG": {
+          "$ref": "DATEXII_3_Common.json#/definitions/ExtensionTypeG"
+        },
+        "energyInfrastructureTablePublicationExtensionG": {
+          "$ref": "DATEXII_3_Common.json#/definitions/ExtensionTypeG"
+        }
+      },
+      "required": [
+        "lang",
+        "publicationTime",
+        "publicationCreator",
+        "energyInfrastructureTable"
+      ]
+    },
+    "EnergyInfrastructureTableVersionedReferenceG": {
+      "type": "object",
+      "properties": {
+        "targetClass": {
+          "type": "string",
+          "default": "EnergyInfrastructureTable"
+        },
+        "idG": {
+          "type": "string"
+        },
+        "versionG": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "targetClass",
+        "idG"
+      ]
+    },
+    "EnergyPricingPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "pricingPolicy": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_EnergyInfrastructure.json#/definitions/PricingPolicyEnumG"
+          },
+          "minItems": 0
+        },
+        "combinationWithParkingFee": {
+          "$ref": "DATEXII_3_Common.json#/definitions/Boolean"
+        },
+        "discount": {
+          "$ref": "DATEXII_3_Common.json#/definitions/Percentage"
+        },
+        "maximumDeliveryFee": {
+          "$ref": "DATEXII_3_Facilities.json#/definitions/AmountOfMoney"
+        },
+        "minimumDeliveryFee": {
+          "$ref": "DATEXII_3_Facilities.json#/definitions/AmountOfMoney"
+        },
+        "additionalInformation": {
+          "$ref": "DATEXII_3_Common.json#/definitions/MultilingualString"
+        },
+        "energyPricingPolicyExtensionG": {
+          "$ref": "DATEXII_3_Common.json#/definitions/ExtensionTypeG"
+        }
+      }
+    },
+    "HydrogenFuellingProcessProtocolEnum": {
+      "type": "string",
+      "enum": [
+        "sae2601v2010",
+        "sae2601v2014",
+        "sae2601v2016",
+        "mcMethod",
+        "unknown",
+        "extendedG"
+      ]
+    },
+    "HydrogenFuellingProcessProtocolEnumG": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "value": {
+          "$ref": "DATEXII_3_EnergyInfrastructure.json#/definitions/HydrogenFuellingProcessProtocolEnum"
+        },
+        "extendedValueG": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "HydrogenRefillPoint": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "idG": {
+          "type": "string"
+        },
+        "versionG": {
+          "type": "string"
+        },
+        "name": {
+          "$ref": "DATEXII_3_Common.json#/definitions/MultilingualString"
+        },
+        "alias": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_Common.json#/definitions/MultilingualString"
+          },
+          "minItems": 0
+        },
+        "externalIdentifier": {
+          "$ref": "DATEXII_3_Common.json#/definitions/String"
+        },
+        "lastUpdated": {
+          "$ref": "DATEXII_3_Common.json#/definitions/DateTime"
+        },
+        "description": {
+          "$ref": "DATEXII_3_Common.json#/definitions/MultilingualString"
+        },
+        "accessibility": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_Facilities.json#/definitions/AccessibilityEnumG"
+          },
+          "minItems": 0
+        },
+        "additionalInformation": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_Common.json#/definitions/MultilingualString"
+          },
+          "minItems": 0
+        },
+        "deliveryUnit": {
+          "$ref": "DATEXII_3_EnergyInfrastructure.json#/definitions/DeliveryUnitEnumG"
+        },
+        "maximumDeliveryAmount": {
+          "$ref": "DATEXII_3_EnergyInfrastructure.json#/definitions/Units"
+        },
+        "minimumDeliveryAmount": {
+          "$ref": "DATEXII_3_EnergyInfrastructure.json#/definitions/Units"
+        },
+        "modelType": {
+          "$ref": "DATEXII_3_Common.json#/definitions/MultilingualString"
+        },
+        "reservation": {
+          "$ref": "DATEXII_3_Facilities.json#/definitions/ReservationTypeEnumG"
+        },
+        "refillSolution": {
+          "$ref": "DATEXII_3_EnergyInfrastructure.json#/definitions/RefillSolutionHydrogenEnumG"
+        },
+        "processProtocol": {
+          "$ref": "DATEXII_3_EnergyInfrastructure.json#/definitions/HydrogenFuellingProcessProtocolEnumG"
+        },
+        "renewableSourcesRatio": {
+          "$ref": "DATEXII_3_Common.json#/definitions/Percentage"
+        },
+        "informationWebsite": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_Common.json#/definitions/UrlLink"
+          },
+          "minItems": 0
+        },
+        "photoUrl": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_Common.json#/definitions/UrlLink"
+          },
+          "minItems": 0
+        },
+        "photo": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_Facilities.json#/definitions/Image"
+          },
+          "minItems": 0
+        },
+        "operatingHours": {
+          "$ref": "DATEXII_3_Facilities.json#/definitions/OperatingHoursG"
+        },
+        "locationReference": {
+          "$ref": "DATEXII_3_LocationReferencing.json#/definitions/LocationReferenceG"
+        },
+        "owner": {
+          "$ref": "DATEXII_3_Facilities.json#/definitions/OrganisationG"
+        },
+        "operator": {
+          "$ref": "DATEXII_3_Facilities.json#/definitions/OrganisationG"
+        },
+        "associatedFacility": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_Facilities.json#/definitions/AssociatedFacilityG"
+          },
+          "minItems": 0
+        },
+        "rates": {
+          "$ref": "DATEXII_3_Facilities.json#/definitions/RatesG"
+        },
+        "applicableForVehicles": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_Common.json#/definitions/VehicleCharacteristics"
+          },
+          "minItems": 0
+        },
+        "dimension": {
+          "$ref": "DATEXII_3_Facilities.json#/definitions/Dimension"
+        },
+        "supplementalFacility": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_Facilities.json#/definitions/SupplementalFacilityG"
+          },
+          "minItems": 0
+        },
+        "serviceType": {
+          "$ref": "DATEXII_3_EnergyInfrastructure.json#/definitions/ServiceType"
+        },
+        "facilityObjectExtensionG": {
+          "$ref": "DATEXII_3_Common.json#/definitions/ExtensionTypeG"
+        },
+        "facilityExtensionG": {
+          "$ref": "DATEXII_3_Common.json#/definitions/ExtensionTypeG"
+        },
+        "refillPointExtensionG": {
+          "$ref": "DATEXII_3_Common.json#/definitions/ExtensionTypeG"
+        },
+        "hydrogenRefillPointExtensionG": {
+          "$ref": "DATEXII_3_Common.json#/definitions/ExtensionTypeG"
+        }
+      },
+      "required": [
+        "idG",
+        "versionG",
+        "refillSolution"
+      ]
+    },
+    "OrganicGasRefillPoint": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "idG": {
+          "type": "string"
+        },
+        "versionG": {
+          "type": "string"
+        },
+        "name": {
+          "$ref": "DATEXII_3_Common.json#/definitions/MultilingualString"
+        },
+        "alias": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_Common.json#/definitions/MultilingualString"
+          },
+          "minItems": 0
+        },
+        "externalIdentifier": {
+          "$ref": "DATEXII_3_Common.json#/definitions/String"
+        },
+        "lastUpdated": {
+          "$ref": "DATEXII_3_Common.json#/definitions/DateTime"
+        },
+        "description": {
+          "$ref": "DATEXII_3_Common.json#/definitions/MultilingualString"
+        },
+        "accessibility": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_Facilities.json#/definitions/AccessibilityEnumG"
+          },
+          "minItems": 0
+        },
+        "additionalInformation": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_Common.json#/definitions/MultilingualString"
+          },
+          "minItems": 0
+        },
+        "deliveryUnit": {
+          "$ref": "DATEXII_3_EnergyInfrastructure.json#/definitions/DeliveryUnitEnumG"
+        },
+        "maximumDeliveryAmount": {
+          "$ref": "DATEXII_3_EnergyInfrastructure.json#/definitions/Units"
+        },
+        "minimumDeliveryAmount": {
+          "$ref": "DATEXII_3_EnergyInfrastructure.json#/definitions/Units"
+        },
+        "modelType": {
+          "$ref": "DATEXII_3_Common.json#/definitions/MultilingualString"
+        },
+        "reservation": {
+          "$ref": "DATEXII_3_Facilities.json#/definitions/ReservationTypeEnumG"
+        },
+        "organicGasType": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_EnergyInfrastructure.json#/definitions/OrganicGasTypeEnumG"
+          },
+          "minItems": 0
+        },
+        "informationWebsite": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_Common.json#/definitions/UrlLink"
+          },
+          "minItems": 0
+        },
+        "photoUrl": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_Common.json#/definitions/UrlLink"
+          },
+          "minItems": 0
+        },
+        "photo": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_Facilities.json#/definitions/Image"
+          },
+          "minItems": 0
+        },
+        "operatingHours": {
+          "$ref": "DATEXII_3_Facilities.json#/definitions/OperatingHoursG"
+        },
+        "locationReference": {
+          "$ref": "DATEXII_3_LocationReferencing.json#/definitions/LocationReferenceG"
+        },
+        "owner": {
+          "$ref": "DATEXII_3_Facilities.json#/definitions/OrganisationG"
+        },
+        "operator": {
+          "$ref": "DATEXII_3_Facilities.json#/definitions/OrganisationG"
+        },
+        "associatedFacility": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_Facilities.json#/definitions/AssociatedFacilityG"
+          },
+          "minItems": 0
+        },
+        "rates": {
+          "$ref": "DATEXII_3_Facilities.json#/definitions/RatesG"
+        },
+        "applicableForVehicles": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_Common.json#/definitions/VehicleCharacteristics"
+          },
+          "minItems": 0
+        },
+        "dimension": {
+          "$ref": "DATEXII_3_Facilities.json#/definitions/Dimension"
+        },
+        "supplementalFacility": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_Facilities.json#/definitions/SupplementalFacilityG"
+          },
+          "minItems": 0
+        },
+        "serviceType": {
+          "$ref": "DATEXII_3_EnergyInfrastructure.json#/definitions/ServiceType"
+        },
+        "facilityObjectExtensionG": {
+          "$ref": "DATEXII_3_Common.json#/definitions/ExtensionTypeG"
+        },
+        "facilityExtensionG": {
+          "$ref": "DATEXII_3_Common.json#/definitions/ExtensionTypeG"
+        },
+        "refillPointExtensionG": {
+          "$ref": "DATEXII_3_Common.json#/definitions/ExtensionTypeG"
+        },
+        "organicGasRefillPointExtensionG": {
+          "$ref": "DATEXII_3_Common.json#/definitions/ExtensionTypeG"
+        }
+      },
+      "required": [
+        "idG",
+        "versionG"
+      ]
+    },
+    "OrganicGasTypeEnum": {
+      "type": "string",
+      "enum": [
+        "all",
+        "cng",
+        "lng",
+        "lpg",
+        "biogas",
+        "other",
+        "unknown",
+        "extendedG"
+      ]
+    },
+    "OrganicGasTypeEnumG": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "value": {
+          "$ref": "DATEXII_3_EnergyInfrastructure.json#/definitions/OrganicGasTypeEnum"
+        },
+        "extendedValueG": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PetrolRefillPoint": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "idG": {
+          "type": "string"
+        },
+        "versionG": {
+          "type": "string"
+        },
+        "name": {
+          "$ref": "DATEXII_3_Common.json#/definitions/MultilingualString"
+        },
+        "alias": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_Common.json#/definitions/MultilingualString"
+          },
+          "minItems": 0
+        },
+        "externalIdentifier": {
+          "$ref": "DATEXII_3_Common.json#/definitions/String"
+        },
+        "lastUpdated": {
+          "$ref": "DATEXII_3_Common.json#/definitions/DateTime"
+        },
+        "description": {
+          "$ref": "DATEXII_3_Common.json#/definitions/MultilingualString"
+        },
+        "accessibility": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_Facilities.json#/definitions/AccessibilityEnumG"
+          },
+          "minItems": 0
+        },
+        "additionalInformation": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_Common.json#/definitions/MultilingualString"
+          },
+          "minItems": 0
+        },
+        "deliveryUnit": {
+          "$ref": "DATEXII_3_EnergyInfrastructure.json#/definitions/DeliveryUnitEnumG"
+        },
+        "maximumDeliveryAmount": {
+          "$ref": "DATEXII_3_EnergyInfrastructure.json#/definitions/Units"
+        },
+        "minimumDeliveryAmount": {
+          "$ref": "DATEXII_3_EnergyInfrastructure.json#/definitions/Units"
+        },
+        "modelType": {
+          "$ref": "DATEXII_3_Common.json#/definitions/MultilingualString"
+        },
+        "reservation": {
+          "$ref": "DATEXII_3_Facilities.json#/definitions/ReservationTypeEnumG"
+        },
+        "petrolType": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_EnergyInfrastructure.json#/definitions/PetrolTypeEnumG"
+          },
+          "minItems": 0
+        },
+        "octane": {
+          "$ref": "DATEXII_3_Common.json#/definitions/NonNegativeInteger"
+        },
+        "bioethanolPercentage": {
+          "$ref": "DATEXII_3_Common.json#/definitions/Percentage"
+        },
+        "bioethanolType": {
+          "$ref": "DATEXII_3_EnergyInfrastructure.json#/definitions/BioethanolTypeEnumG"
+        },
+        "informationWebsite": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_Common.json#/definitions/UrlLink"
+          },
+          "minItems": 0
+        },
+        "photoUrl": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_Common.json#/definitions/UrlLink"
+          },
+          "minItems": 0
+        },
+        "photo": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_Facilities.json#/definitions/Image"
+          },
+          "minItems": 0
+        },
+        "operatingHours": {
+          "$ref": "DATEXII_3_Facilities.json#/definitions/OperatingHoursG"
+        },
+        "locationReference": {
+          "$ref": "DATEXII_3_LocationReferencing.json#/definitions/LocationReferenceG"
+        },
+        "owner": {
+          "$ref": "DATEXII_3_Facilities.json#/definitions/OrganisationG"
+        },
+        "operator": {
+          "$ref": "DATEXII_3_Facilities.json#/definitions/OrganisationG"
+        },
+        "associatedFacility": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_Facilities.json#/definitions/AssociatedFacilityG"
+          },
+          "minItems": 0
+        },
+        "rates": {
+          "$ref": "DATEXII_3_Facilities.json#/definitions/RatesG"
+        },
+        "applicableForVehicles": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_Common.json#/definitions/VehicleCharacteristics"
+          },
+          "minItems": 0
+        },
+        "dimension": {
+          "$ref": "DATEXII_3_Facilities.json#/definitions/Dimension"
+        },
+        "supplementalFacility": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_Facilities.json#/definitions/SupplementalFacilityG"
+          },
+          "minItems": 0
+        },
+        "serviceType": {
+          "$ref": "DATEXII_3_EnergyInfrastructure.json#/definitions/ServiceType"
+        },
+        "facilityObjectExtensionG": {
+          "$ref": "DATEXII_3_Common.json#/definitions/ExtensionTypeG"
+        },
+        "facilityExtensionG": {
+          "$ref": "DATEXII_3_Common.json#/definitions/ExtensionTypeG"
+        },
+        "refillPointExtensionG": {
+          "$ref": "DATEXII_3_Common.json#/definitions/ExtensionTypeG"
+        },
+        "petrolRefillPointExtensionG": {
+          "$ref": "DATEXII_3_Common.json#/definitions/ExtensionTypeG"
+        }
+      },
+      "required": [
+        "idG",
+        "versionG"
+      ]
+    },
+    "PetrolTypeEnum": {
+      "type": "string",
+      "enum": [
+        "all",
+        "octane95",
+        "octane98",
+        "leaded",
+        "unleaded",
+        "superE5",
+        "superE10",
+        "other",
+        "unknown",
+        "extendedG"
+      ]
+    },
+    "PetrolTypeEnumG": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "value": {
+          "$ref": "DATEXII_3_EnergyInfrastructure.json#/definitions/PetrolTypeEnum"
+        },
+        "extendedValueG": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PricingPolicyEnum": {
+      "type": "string",
+      "enum": [
+        "pricePerChargingTime",
+        "pricePerDeliveryUnit",
+        "contract",
+        "flatRate",
+        "unknown",
+        "free",
+        "other",
+        "extendedG"
+      ]
+    },
+    "PricingPolicyEnumG": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "value": {
+          "$ref": "DATEXII_3_EnergyInfrastructure.json#/definitions/PricingPolicyEnum"
+        },
+        "extendedValueG": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "RefillPointG": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "egiHydrogenRefillPoint": {
+          "$ref": "DATEXII_3_EnergyInfrastructure.json#/definitions/HydrogenRefillPoint"
+        },
+        "egiPetrolRefillPoint": {
+          "$ref": "DATEXII_3_EnergyInfrastructure.json#/definitions/PetrolRefillPoint"
+        },
+        "egiOrganicGasRefillPoint": {
+          "$ref": "DATEXII_3_EnergyInfrastructure.json#/definitions/OrganicGasRefillPoint"
+        },
+        "egiElectricChargingPoint": {
+          "$ref": "DATEXII_3_EnergyInfrastructure.json#/definitions/ElectricChargingPoint"
+        },
+        "egiDieselRefillPoint": {
+          "$ref": "DATEXII_3_EnergyInfrastructure.json#/definitions/DieselRefillPoint"
+        }
+      }
+    },
+    "RefillPointStatus": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "reference": {
+          "$ref": "DATEXII_3_Facilities.json#/definitions/FacilityObjectVersionedReferenceG"
+        },
+        "lastUpdated": {
+          "$ref": "DATEXII_3_Common.json#/definitions/DateTime"
+        },
+        "openingStatus": {
+          "$ref": "DATEXII_3_Facilities.json#/definitions/OpeningStatusEnumG"
+        },
+        "regularOperatingHoursInForce": {
+          "$ref": "DATEXII_3_Common.json#/definitions/Boolean"
+        },
+        "statusDescription": {
+          "$ref": "DATEXII_3_Common.json#/definitions/MultilingualString"
+        },
+        "status": {
+          "$ref": "DATEXII_3_EnergyInfrastructure.json#/definitions/RefillPointStatusEnumG"
+        },
+        "unitsInStock": {
+          "$ref": "DATEXII_3_EnergyInfrastructure.json#/definitions/Units"
+        },
+        "newOperatingHours": {
+          "$ref": "DATEXII_3_Facilities.json#/definitions/OperatingHoursG"
+        },
+        "newRates": {
+          "$ref": "DATEXII_3_Facilities.json#/definitions/RatesG"
+        },
+        "fault": {
+          "$ref": "DATEXII_3_Common.json#/definitions/FaultG"
+        },
+        "supplementalFacilityStatus": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_Facilities.json#/definitions/SupplementalFacilityStatus"
+          },
+          "minItems": 0
+        },
+        "waitingTime": {
+          "$ref": "DATEXII_3_Facilities.json#/definitions/DurationValue"
+        },
+        "facilityObjectStatusExtensionG": {
+          "$ref": "DATEXII_3_Common.json#/definitions/ExtensionTypeG"
+        },
+        "facilityStatusExtensionG": {
+          "$ref": "DATEXII_3_Common.json#/definitions/ExtensionTypeG"
+        },
+        "refillPointStatusExtensionG": {
+          "$ref": "DATEXII_3_Common.json#/definitions/ExtensionTypeG"
+        }
+      },
+      "required": [
+        "reference",
+        "status"
+      ]
+    },
+    "RefillPointStatusEnum": {
+      "type": "string",
+      "enum": [
+        "available",
+        "blocked",
+        "charging",
+        "faulted",
+        "inoperative",
+        "occupied",
+        "outOfOrder",
+        "outOfStock",
+        "planned",
+        "removed",
+        "reserved",
+        "unavailable",
+        "unknown",
+        "extendedG"
+      ]
+    },
+    "RefillPointStatusEnumG": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "value": {
+          "$ref": "DATEXII_3_EnergyInfrastructure.json#/definitions/RefillPointStatusEnum"
+        },
+        "extendedValueG": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "RefillPointStatusG": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "egiRefillPointStatus": {
+          "$ref": "DATEXII_3_EnergyInfrastructure.json#/definitions/RefillPointStatus"
+        },
+        "egiElectricChargingPointStatus": {
+          "$ref": "DATEXII_3_EnergyInfrastructure.json#/definitions/ElectricChargingPointStatus"
+        }
+      }
+    },
+    "RefillSolutionHydrogenEnum": {
+      "type": "string",
+      "enum": [
+        "gaseousHydrogen350barCar",
+        "gaseousHydrogen350barTruck",
+        "gaseousHydrogen700barCar",
+        "gaseousHydrogen700barTruck",
+        "liquidHydrogen",
+        "cryoCompressedHydrogren",
+        "unknown",
+        "extendedG"
+      ]
+    },
+    "RefillSolutionHydrogenEnumG": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "value": {
+          "$ref": "DATEXII_3_EnergyInfrastructure.json#/definitions/RefillSolutionHydrogenEnum"
+        },
+        "extendedValueG": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ServiceType": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "serviceType": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_EnergyInfrastructure.json#/definitions/ServiceTypeEnumG"
+          },
+          "minItems": 0
+        },
+        "serviceTypeExtensionG": {
+          "$ref": "DATEXII_3_Common.json#/definitions/ExtensionTypeG"
+        }
+      }
+    },
+    "ServiceTypeEnum": {
+      "type": "string",
+      "enum": [
+        "fullService",
+        "selfService",
+        "unattended",
+        "extendedG"
+      ]
+    },
+    "ServiceTypeEnumG": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "value": {
+          "$ref": "DATEXII_3_EnergyInfrastructure.json#/definitions/ServiceTypeEnum"
+        },
+        "extendedValueG": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "Units": {
+      "$ref": "DATEXII_3_Common.json#/definitions/Float"
+    },
+    "VehicleSpace": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "idG": {
+          "type": "string"
+        },
+        "versionG": {
+          "type": "string"
+        },
+        "name": {
+          "$ref": "DATEXII_3_Common.json#/definitions/MultilingualString"
+        },
+        "alias": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_Common.json#/definitions/MultilingualString"
+          },
+          "minItems": 0
+        },
+        "externalIdentifier": {
+          "$ref": "DATEXII_3_Common.json#/definitions/String"
+        },
+        "lastUpdated": {
+          "$ref": "DATEXII_3_Common.json#/definitions/DateTime"
+        },
+        "description": {
+          "$ref": "DATEXII_3_Common.json#/definitions/MultilingualString"
+        },
+        "accessibility": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_Facilities.json#/definitions/AccessibilityEnumG"
+          },
+          "minItems": 0
+        },
+        "additionalInformation": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_Common.json#/definitions/MultilingualString"
+          },
+          "minItems": 0
+        },
+        "parkingAllowedAfterCharging": {
+          "$ref": "DATEXII_3_Common.json#/definitions/Boolean"
+        },
+        "informationWebsite": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_Common.json#/definitions/UrlLink"
+          },
+          "minItems": 0
+        },
+        "photoUrl": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_Common.json#/definitions/UrlLink"
+          },
+          "minItems": 0
+        },
+        "photo": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_Facilities.json#/definitions/Image"
+          },
+          "minItems": 0
+        },
+        "operatingHours": {
+          "$ref": "DATEXII_3_Facilities.json#/definitions/OperatingHoursG"
+        },
+        "locationReference": {
+          "$ref": "DATEXII_3_LocationReferencing.json#/definitions/LocationReferenceG"
+        },
+        "owner": {
+          "$ref": "DATEXII_3_Facilities.json#/definitions/OrganisationG"
+        },
+        "operator": {
+          "$ref": "DATEXII_3_Facilities.json#/definitions/OrganisationG"
+        },
+        "associatedFacility": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_Facilities.json#/definitions/AssociatedFacilityG"
+          },
+          "minItems": 0
+        },
+        "rates": {
+          "$ref": "DATEXII_3_Facilities.json#/definitions/RatesG"
+        },
+        "applicableForVehicles": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_Common.json#/definitions/VehicleCharacteristics"
+          },
+          "minItems": 0
+        },
+        "dimension": {
+          "$ref": "DATEXII_3_Facilities.json#/definitions/Dimension"
+        },
+        "supplementalFacility": {
+          "type": "array",
+          "items": {
+            "$ref": "DATEXII_3_Facilities.json#/definitions/SupplementalFacilityG"
+          },
+          "minItems": 0
+        },
+        "facilityObjectExtensionG": {
+          "$ref": "DATEXII_3_Common.json#/definitions/ExtensionTypeG"
+        },
+        "facilityExtensionG": {
+          "$ref": "DATEXII_3_Common.json#/definitions/ExtensionTypeG"
+        },
+        "vehicleSpaceExtensionG": {
+          "$ref": "DATEXII_3_Common.json#/definitions/ExtensionTypeG"
+        }
+      },
+      "required": [
+        "idG",
+        "versionG"
+      ]
+    },
+    "VehicleToGridCommunicationTypeEnum": {
+      "type": "string",
+      "enum": [
+        "none",
+        "iso15118",
+        "iec619802",
+        "other",
+        "unknown",
+        "extendedG"
+      ]
+    },
+    "VehicleToGridCommunicationTypeEnumG": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "value": {
+          "$ref": "DATEXII_3_EnergyInfrastructure.json#/definitions/VehicleToGridCommunicationTypeEnum"
+        },
+        "extendedValueG": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "Volt": {
+      "$ref": "DATEXII_3_Common.json#/definitions/Float"
+    },
+    "Watt": {
+      "$ref": "DATEXII_3_Common.json#/definitions/Float"
+    }
+  }
+}

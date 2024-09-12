@@ -1,0 +1,72 @@
+openapi: 3.0.0
+servers:
+  # Added by API Auto Mocking Plugin
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/jaderb/datexpull/1.0.2
+info:
+  description: This is DATEX II Snapshot PULL API returning PayloadPublication.
+  version: 1.0.2
+  title: DATEX II Snapshot Pull API
+  contact:
+    email: you@your-company.com
+tags:
+  - name: developers
+    description: Operations available to regular developers
+paths:
+  /pull:
+      get:
+        tags:
+          - developers
+        summary: DATEX II snapshot pull
+        operationId: snapshotPull
+        description: 'Snapshot pull DATEX II API'
+        responses:
+          '200':
+            description: Result from snapshot pull
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/MessageContainer'
+  /pullsituation:
+      get:
+        tags:
+          - developers
+        summary: DATEX II snapshot pull situation
+        operationId: snapshotPullSituation
+        description: 'Snapshot pull situation DATEX II API'
+        parameters:
+          - in: query
+            name: id
+            description: Id of Situation
+            required: true
+            schema:
+              type: string
+        responses:
+          '200':
+            description: Result from snapshot pull
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/Situation'
+  /keepalive:
+      get:
+        tags:
+          - developers
+        summary: DATEX II snapshot pull
+        operationId: keepAlive
+        description: 'Keepalive '
+        responses:
+          '200':
+            description: Result from keepalive
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/ExchangheInformation'
+components:
+  schemas:
+    MessageContainer:
+      $ref: "DATEXII_3_MessageContainer.json#/definitions/MessageContainer"
+    ExchangheInformation:
+      $ref: "DATEXII_3_ExchangeInformation.json#/definitions/ExchangeInformation"
+    Situation:
+      $ref: "DATEXII_3_Situation.json#/definitions/Situation"
