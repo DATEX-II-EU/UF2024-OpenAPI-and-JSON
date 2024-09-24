@@ -18,3 +18,4 @@ EOF
 
 echo 'Adding alias to current session'
 alias openapi-generator="java -jar /usr/local/bin/openapi-generator-cli.jar" || { echo 'alias command failed'; exit 1; }
+
