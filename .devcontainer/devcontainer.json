@@ -18,8 +18,19 @@
                 "ms-dotnettools.csharp",
                 "ms-dotnettools.vscode-dotnet-runtime",
 				"ms-dotnettools.csdevkit",
-                "ms-python.python"
+                "ms-python.python",
+                "humao.rest-client"
             ]
         }
-    }
+    },
+    // Use 'forwardPorts' to make a list of ports inside the container available locally.
+	 "forwardPorts": [44301,8080],
+	 "portsAttributes": {
+			"44301": {
+				"protocol": "https"
+			},
+            "8080": {
+				"protocol": "https"
+			}
+	 }
 }

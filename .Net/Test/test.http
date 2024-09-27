@@ -1,0 +1,23 @@
+@LOCALBASEURL = https://localhost:44301
+@EXTERNALURL = https://friendly-space-goldfish-6xrqjppj9rh47pj-44301.app.github.dev/
+
+## Call local http GET server
+GET {{LOCALBASEURL}}
+User-Agent: rest-client
+Content-Type: application/xml
+
+###
+#Get OpenAPI page
+GET {{LOCALBASEURL}}/openapi
+User-Agent: rest-client
+
+###
+#Get OpenAPI spec
+GET {{LOCALBASEURL}}/openapi/1.0.2/openapi.json
+User-Agent: rest-client
+
+###
+#Get OpenAPI spec
+GET {{EXTERNALURL}}/keepalive
+User-Agent: rest-client
+
