@@ -1,5 +1,5 @@
 @LOCALBASEURL = https://localhost:44301
-@EXTERNALURL = https://friendly-space-goldfish-6xrqjppj9rh47pj-44301.app.github.dev/
+@EXTERNALURL = https://upgraded-space-cod-4rjxv94jqgg35grj-44301.app.github.dev/
 
 ## Call local http GET server
 GET {{LOCALBASEURL}}
@@ -17,7 +17,12 @@ GET {{LOCALBASEURL}}/openapi/1.0.2/openapi.json
 User-Agent: rest-client
 
 ###
-#Get OpenAPI spec
+#Get keepAlive external
 GET {{EXTERNALURL}}/keepalive
 User-Agent: rest-client
 
+
+###
+#Get keepAlive internal
+GET {{@LOCALBASEURL = https://localhost:44301}}/keepalive
+User-Agent: rest-client

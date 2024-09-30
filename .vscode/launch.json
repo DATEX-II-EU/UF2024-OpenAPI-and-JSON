@@ -14,6 +14,13 @@
             "type": "dotnet",
             "request": "launch",
             "projectPath": "${workspaceFolder}/.Net/.Net/DatexServer_Small_Accident/src/Org.OpenAPITools/Org.OpenAPITools.csproj"
-        }
+        },      
+        {
+            "type": "java",
+            "name": "JaVA: Debug (Launch) - Spring Boot",
+            "request": "launch",
+            "mainClass": "org.openapitools.OpenApiGeneratorApplication",
+            "projectName": "openapi-spring"
+        }  
     ]
 }
