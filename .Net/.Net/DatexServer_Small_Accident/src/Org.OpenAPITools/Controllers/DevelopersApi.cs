@@ -34,7 +34,7 @@ namespace Org.OpenAPITools.Controllers
         /// <remarks>Keepalive </remarks>
         /// <response code="200">Result from keepalive</response>
         [HttpGet]
-        [Route("/datexpull/1.0.2/keepalive")]
+        [Route("/keepalive")]
         [ValidateModelState]
         [SwaggerOperation("KeepAlive")]
         [SwaggerResponse(statusCode: 200, type: typeof(ExchangheInformation), description: "Result from keepalive")]
@@ -59,7 +59,7 @@ namespace Org.OpenAPITools.Controllers
         /// <remarks>Snapshot pull DATEX II API</remarks>
         /// <response code="200">Result from snapshot pull</response>
         [HttpGet]
-        [Route("/datexpull/1.0.2/pull")]
+        [Route("/pull")]
         [ValidateModelState]
         [SwaggerOperation("SnapshotPull")]
         [SwaggerResponse(statusCode: 200, type: typeof(MessageContainer), description: "Result from snapshot pull")]
@@ -85,7 +85,7 @@ namespace Org.OpenAPITools.Controllers
         /// <param name="id">Id of Situation</param>
         /// <response code="200">Result from snapshot pull</response>
         [HttpGet]
-        [Route("/datexpull/1.0.2/pullsituation")]
+        [Route("/pullsituation")]
         [ValidateModelState]
         [SwaggerOperation("SnapshotPullSituation")]
         [SwaggerResponse(statusCode: 200, type: typeof(Situation), description: "Result from snapshot pull")]

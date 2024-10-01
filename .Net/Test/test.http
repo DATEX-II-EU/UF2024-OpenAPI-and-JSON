@@ -24,5 +24,5 @@ User-Agent: rest-client
 
 ###
 #Get keepAlive internal
-GET {{@LOCALBASEURL = https://localhost:44301}}/keepalive
+GET {{LOCALBASEURL}}/keepalive
 User-Agent: rest-client
