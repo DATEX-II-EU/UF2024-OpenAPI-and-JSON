@@ -5,15 +5,30 @@
             "name": "Python: Connexion",
             "type": "debugpy",
             "request": "launch",
-            "program": "${workspaceFolder}/Python/Python/DatexServer_Small_Accident/openapi_server/__main__.py",
+            "program": "${workspaceFolder}/Python/DatexServer_Small_Accident/openapi_server/__main__.py",
             "args": [],
             "jinja": true
         },
         {
             "name": "C#: Dotnet Debug",
-            "type": "dotnet",
+            "type": "coreclr",
             "request": "launch",
-            "projectPath": "${workspaceFolder}/.Net/.Net/DatexServer_Small_Accident/src/Org.OpenAPITools/Org.OpenAPITools.csproj"
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/.Net/DatexServer_Small_Accident/src/Org.OpenAPITools/bin/Debug/net8.0/Org.OpenAPITools.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/.Net/DatexServer_Small_Accident/src/Org.OpenAPITools",
+            "stopAtEntry": false,
+            "serverReadyAction": {
+                "action": "openExternally",
+                "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+            },
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            },
+            "sourceFileMap": {
+                "/Views": "${workspaceFolder}/Views"
+            },
+            "justMyCode": true
         },      
         {
             "type": "java",
