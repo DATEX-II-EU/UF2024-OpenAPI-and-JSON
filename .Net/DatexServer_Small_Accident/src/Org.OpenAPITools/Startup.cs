@@ -90,6 +90,18 @@ namespace Org.OpenAPITools
                         },
                         Version = "1.0.2",
                     });
+
+                    // Retrieve the Codespace name from environment variables
+                    var codespaceName = Environment.GetEnvironmentVariable("CODESPACE_NAME");
+                    var serverUrl = $"https://{codespaceName}-44301.app.github.dev/datexpull/1.0.2"; // Adjust the port number as needed
+
+                    // Add server information
+                    c.AddServer(new OpenApiServer
+                    {
+                        Url = serverUrl,
+                        Description = "GitHub Codespaces server"
+                    });
+                    
                     c.CustomSchemaIds(type => type.FriendlyId(true));
                     c.IncludeXmlComments($"{AppContext.BaseDirectory}{Path.DirectorySeparatorChar}{Assembly.GetEntryAssembly().GetName().Name}.xml");
                     // Sets the basePath property in the OpenAPI document generated
@@ -124,18 +136,19 @@ namespace Org.OpenAPITools
             app.UseStaticFiles();
             app.UseSwagger(c =>
                 {
-                    c.RouteTemplate = "openapi/{documentName}/openapi.json";
+                    c.RouteTemplate = "datexpull/{documentName}/openapi.json";
                 })
                 .UseSwaggerUI(c =>
                 {
                     // set route prefix to openapi, e.g. http://localhost:8080/openapi/index.html
-                    c.RoutePrefix = "openapi";
+                    c.RoutePrefix = "datexpull";
                     //TODO: Either use the SwaggerGen generated OpenAPI contract (generated from C# classes)
-                    c.SwaggerEndpoint("/openapi/1.0.2/openapi.json", "DATEX II Snapshot Pull API");
+                    c.SwaggerEndpoint("/datexpull/1.0.2/openapi.json", "DATEX II Snapshot Pull API");
 
                     //TODO: Or alternatively use the original OpenAPI contract that's included in the static files
                     // c.SwaggerEndpoint("/openapi-original.json", "DATEX II Snapshot Pull API Original");
                 });
+         
             app.UseRouting();
             app.UseEndpoints(endpoints =>
                 {
