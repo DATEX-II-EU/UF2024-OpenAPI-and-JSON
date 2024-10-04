@@ -52,7 +52,7 @@ paths:
       get:
         tags:
           - developers
-        summary: DATEX II snapshot pull
+        summary: DATEX II snapshot pull keepAlive
         operationId: keepAlive
         description: 'Keepalive '
         responses:
@@ -61,12 +61,12 @@ paths:
             content:
               application/json:
                 schema:
-                  $ref: '#/components/schemas/ExchangheInformation'
+                  $ref: '#/components/schemas/ExchangeInformation'
 components:
   schemas:
     MessageContainer:
       $ref: "DATEXII_3_MessageContainer.json#/definitions/MessageContainer"
-    ExchangheInformation:
+    ExchangeInformation:
       $ref: "DATEXII_3_ExchangeInformation.json#/definitions/ExchangeInformation"
     Situation:
       $ref: "DATEXII_3_Situation.json#/definitions/Situation"
