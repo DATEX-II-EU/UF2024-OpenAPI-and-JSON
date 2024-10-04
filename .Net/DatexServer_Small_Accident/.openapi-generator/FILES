@@ -1,4 +1,3 @@
-.openapi-generator-ignore
 Org.OpenAPITools.sln
 README.md
 build.bat
@@ -62,7 +61,6 @@ src/Org.OpenAPITools/Models/ExchangeReturnEnum.cs
 src/Org.OpenAPITools/Models/ExchangeReturnEnumG.cs
 src/Org.OpenAPITools/Models/ExchangeStatusEnum.cs
 src/Org.OpenAPITools/Models/ExchangeStatusEnumG.cs
-src/Org.OpenAPITools/Models/ExchangheInformation.cs
 src/Org.OpenAPITools/Models/FuelTypeEnum.cs
 src/Org.OpenAPITools/Models/FuelTypeEnumG.cs
 src/Org.OpenAPITools/Models/GmlLineString.cs

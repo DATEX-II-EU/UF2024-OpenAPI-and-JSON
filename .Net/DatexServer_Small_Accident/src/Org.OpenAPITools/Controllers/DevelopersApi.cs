@@ -28,8 +28,8 @@ namespace Org.OpenAPITools.Controllers
     [ApiController]
     public class DevelopersApiController : ControllerBase
     { 
-        /// <summary>
-        /// DATEX II snapshot pull
+         /// <summary>
+        /// DATEX II snapshot pull keepAlive
         /// </summary>
         /// <remarks>Keepalive </remarks>
         /// <response code="200">Result from keepalive</response>
@@ -37,11 +37,11 @@ namespace Org.OpenAPITools.Controllers
         [Route("/datexpull/1.0.2/keepalive")]
         [ValidateModelState]
         [SwaggerOperation("KeepAlive")]
-        [SwaggerResponse(statusCode: 200, type: typeof(ExchangheInformation), description: "Result from keepalive")]
+        [SwaggerResponse(statusCode: 200, type: typeof(ExchangeInformation), description: "Result from keepalive")]
         public virtual IActionResult KeepAlive()
         {
 
-            ExchangheInformation ex = new ExchangheInformation();
+            ExchangeInformation ex = new ExchangeInformation();
             ex.DynamicInformation = new DynamicInformation();
             ex.DynamicInformation.ExchangeStatus = new ExchangeStatusEnumG();
             ex.DynamicInformation.ExchangeStatus.Value = ExchangeStatusEnum.OnlineEnum;

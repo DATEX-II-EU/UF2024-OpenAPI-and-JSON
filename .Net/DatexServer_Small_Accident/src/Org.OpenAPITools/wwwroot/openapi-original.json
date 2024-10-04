@@ -77,14 +77,14 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ExchangheInformation"
+                  "$ref" : "#/components/schemas/ExchangeInformation"
                 }
               }
             },
             "description" : "Result from keepalive"
           }
         },
-        "summary" : "DATEX II snapshot pull",
+        "summary" : "DATEX II snapshot pull keepAlive",
         "tags" : [ "developers" ]
       }
     }
@@ -23609,7 +23609,7 @@
         "required" : [ "exchangeInformation" ],
         "type" : "object"
       },
-      "ExchangheInformation" : {
+      "ExchangeInformation" : {
         "additionalProperties" : false,
         "example" : {
           "messageType" : {
@@ -29547,183 +29547,6 @@
           }
         },
         "required" : [ "headerInformation", "idG", "situationRecord" ],
-        "type" : "object"
-      },
-      "ExchangeInformation" : {
-        "additionalProperties" : false,
-        "example" : {
-          "messageType" : {
-            "extendedValueG" : "extendedValueG",
-            "value" : "CISFeedback"
-          },
-          "exchangeInformationExtensionG" : {
-            "key" : ""
-          },
-          "dynamicInformation" : {
-            "completedPaylod" : true,
-            "returnInformation" : {
-              "returnStatus" : {
-                "extendedValueG" : "extendedValueG",
-                "value" : "ack"
-              },
-              "returnInformationExtensionG" : {
-                "key" : ""
-              },
-              "returnStatusReason" : {
-                "values" : [ {
-                  "lang" : "lang",
-                  "value" : "value"
-                }, {
-                  "lang" : "lang",
-                  "value" : "value"
-                } ]
-              },
-              "codedInvalidityReason" : [ {
-                "extendedValueG" : "extendedValueG",
-                "value" : "invalidCISInformation"
-              }, {
-                "extendedValueG" : "extendedValueG",
-                "value" : "invalidCISInformation"
-              } ]
-            },
-            "exchangeStatusDescription" : {
-              "values" : [ {
-                "lang" : "lang",
-                "value" : "value"
-              }, {
-                "lang" : "lang",
-                "value" : "value"
-              } ]
-            },
-            "dynamicInformationExtensionG" : {
-              "key" : ""
-            },
-            "exchangeStatus" : {
-              "extendedValueG" : "extendedValueG",
-              "value" : "closingSession"
-            },
-            "messageSequencingNumber" : 0,
-            "sessionInformation" : {
-              "startSession" : "2000-01-23T04:56:07.000+00:00",
-              "sessionID" : "sessionID",
-              "sessionInformationExtensionG" : {
-                "key" : ""
-              }
-            },
-            "messageGenerationTimestamp" : "2000-01-23T04:56:07.000+00:00"
-          },
-          "exchangeContext" : {
-            "supplierOrCisRequester" : {
-              "internationalIdentifier" : {
-                "country" : "country",
-                "nationalIdentifier" : "nationalIdentifier",
-                "internationalIdentifierExtensionG" : {
-                  "key" : ""
-                }
-              },
-              "agentExtensionG" : {
-                "key" : ""
-              },
-              "address" : "address",
-              "name" : "name",
-              "serviceURL" : "serviceURL",
-              "referenceID" : "referenceID"
-            },
-            "operatingMode" : {
-              "extendedValueG" : "extendedValueG",
-              "value" : "conditionTriggered"
-            },
-            "exchangeContextExtensionG" : {
-              "key" : ""
-            },
-            "exchangeSpecificationVersion" : "exchangeSpecificationVersion",
-            "codedExchangeProtocol" : {
-              "extendedValueG" : "extendedValueG",
-              "value" : "deltaPull"
-            },
-            "nonCodedExchangeProtocol" : "nonCodedExchangeProtocol",
-            "subscription" : {
-              "subscriptionEnd" : "2000-01-23T04:56:07.000+00:00",
-              "deliveyFrequency" : 0,
-              "name" : "name",
-              "subscriptionStart" : "2000-01-23T04:56:07.000+00:00",
-              "validity" : {
-                "validityTimeSpecification" : {
-                  "overallEndTime" : "2000-01-23T04:56:07.000+00:00",
-                  "overallPeriodExtensionG" : {
-                    "key" : ""
-                  },
-                  "overallStartTime" : "2000-01-23T04:56:07.000+00:00"
-                },
-                "validityExtensionG" : {
-                  "key" : ""
-                },
-                "validityStatus" : {
-                  "extendedValueG" : "extendedValueG",
-                  "value" : "active"
-                }
-              },
-              "referenceID" : {
-                "idG" : "idG"
-              },
-              "subscriptionExtensionG" : {
-                "key" : ""
-              }
-            },
-            "updateMethod" : {
-              "extendedValueG" : "extendedValueG",
-              "value" : "allElementUpdate"
-            },
-            "clientOrCisProvider" : [ {
-              "internationalIdentifier" : {
-                "country" : "country",
-                "nationalIdentifier" : "nationalIdentifier",
-                "internationalIdentifierExtensionG" : {
-                  "key" : ""
-                }
-              },
-              "agentExtensionG" : {
-                "key" : ""
-              },
-              "address" : "address",
-              "name" : "name",
-              "serviceURL" : "serviceURL",
-              "referenceID" : "referenceID"
-            }, {
-              "internationalIdentifier" : {
-                "country" : "country",
-                "nationalIdentifier" : "nationalIdentifier",
-                "internationalIdentifierExtensionG" : {
-                  "key" : ""
-                }
-              },
-              "agentExtensionG" : {
-                "key" : ""
-              },
-              "address" : "address",
-              "name" : "name",
-              "serviceURL" : "serviceURL",
-              "referenceID" : "referenceID"
-            } ]
-          }
-        },
-        "properties" : {
-          "messageType" : {
-            "$ref" : "#/components/schemas/MessageTypeEnumG"
-          },
-          "exchangeContext" : {
-            "$ref" : "#/components/schemas/ExchangeContext"
-          },
-          "dynamicInformation" : {
-            "$ref" : "#/components/schemas/DynamicInformation"
-          },
-          "exchangeInformationExtensionG" : {
-            "additionalProperties" : true,
-            "title" : "ExtensionTypeG",
-            "type" : "object"
-          }
-        },
-        "required" : [ "dynamicInformation", "exchangeContext" ],
         "type" : "object"
       },
       "MessageTypeEnumG" : {
