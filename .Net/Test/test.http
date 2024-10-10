@@ -2,27 +2,27 @@
 @EXTERNALURL = https://upgraded-space-cod-4rjxv94jqgg35grj-44301.app.github.dev/
 
 ## Call local http GET server
-GET {{LOCALBASEURL}}
+GET {{LOCALBASEURL}}/datexpull/1.0.2/pull
 User-Agent: rest-client
 Content-Type: application/xml
 
 ###
 #Get OpenAPI page
-GET {{LOCALBASEURL}}/openapi
+GET {{LOCALBASEURL}}/datexpull
 User-Agent: rest-client
 
 ###
 #Get OpenAPI spec
-GET {{LOCALBASEURL}}/openapi/1.0.2/openapi.json
+GET {{LOCALBASEURL}}/datexpull/1.0.2/openapi.json
 User-Agent: rest-client
 
 ###
 #Get keepAlive external
-GET {{EXTERNALURL}}/keepalive
+GET {{EXTERNALURL}}/datexpull/1.0.2/keepalive
 User-Agent: rest-client
 
 
 ###
 #Get keepAlive internal
-GET {{LOCALBASEURL}}/keepalive
+GET {{LOCALBASEURL}}/datexpull/1.0.2/keepalive
 User-Agent: rest-client
